@@ -41,7 +41,7 @@
     <EditText
         android:id="@+id/email"
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_gravity="center"
         android:layout_margin="15dp"
         android:background="@drawable/borda_escura_gradiente"
@@ -52,7 +52,7 @@
     <EditText
         android:id="@+id/senha"
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_gravity="center"
         android:background="@drawable/borda_escura_gradiente"
         android:layout_margin="15dp"
