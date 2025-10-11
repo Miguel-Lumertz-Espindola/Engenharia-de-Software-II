@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".EditarDietaActivity">
+
+    <!-- CABEÇALHO SUPERIOR -->
+    <LinearLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/azulEsverdeado"
+        android:padding="7dp">
+
+        <ImageButton
+            android:id="@+id/buttonlogo"
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/logobranco"
+            android:scaleType="fitCenter"
+            android:contentDescription="Logo BioBalance" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="BioBalance"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+
+        <ImageButton
+            android:id="@+id/buttonMenu"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="Menu"
+            android:src="@drawable/menu"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:background="@null"     />
+    </LinearLayout>
+
+    <!-- Barra superior -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/azulEsverdeado"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageButton
+            android:id="@+id/btnVoltar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_arrow_left"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Voltar" />
+
+        <TextView
+            android:id="@+id/textoTituloEditar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Editar Dieta"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:gravity="center"
+            android:layout_marginEnd="40dp" />
+    </LinearLayout>
+
+    <!-- Conteúdo principal -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:id="@+id/layoutConteudoEditar"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textoDiaSelecionado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dia selecionado: 10"
+                android:textColor="@color/azulEscuro"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Campos de exemplo para edição -->
+            <EditText
+                android:id="@+id/inputCafeManha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Café da manhã"
+                android:inputType="textMultiLine|textCapSentences"
+                android:gravity="top"
+                android:lines="5"
+                android:imeOptions="actionDone"/>
+
+            <EditText
+                android:id="@+id/inputAlmoco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Almoço"
+                android:inputType="textMultiLine|textCapSentences"
+                android:gravity="top"
+                android:lines="5"
+                android:imeOptions="actionDone"
+                android:layout_marginTop="10dp" />
+
+            <EditText
+                android:id="@+id/inputJantar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Jantar"
+                android:inputType="textMultiLine|textCapSentences"
+                android:gravity="top"
+                android:lines="5"
+                android:imeOptions="actionDone"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Botões de ação -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnSalvar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Salvar"
+            android:backgroundTint="@color/azulEsverdeado"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnExcluir"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Excluir"
+            android:layout_marginStart="10dp"
+            android:backgroundTint="@color/red"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</LinearLayout>
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:orientation="vertical"-->
+<!--    tools:context=".todayActivity"-->
+<!--    android:background="@color/white">-->
+
+<!--    &lt;!&ndash; CABEÇALHO SUPERIOR &ndash;&gt;-->
+<!--    <LinearLayout-->
+<!--        android:id="@+id/top_bar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:background="@color/azulEsverdeado"-->
+<!--        android:padding="7dp">-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/buttonlogo"-->
+<!--            android:layout_width="75dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--            android:src="@drawable/logobranco"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            android:contentDescription="Logo BioBalance" />-->
+
+<!--        <TextView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:gravity="center"-->
+<!--            android:text="BioBalance"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="25sp" />-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/buttonMenu"-->
+<!--            android:layout_width="60dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:contentDescription="Menu"-->
+<!--            android:src="@drawable/menu1" />-->
+<!--    </LinearLayout>-->
+
+<!--</LinearLayout>-->
