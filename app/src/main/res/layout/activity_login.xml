@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/login"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/cinza">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/azulclaro"
+        android:background="@color/azulEsverdeado"
         android:orientation="horizontal"
         android:padding="7dp">
 
@@ -31,12 +32,12 @@
         />
 
     <ImageView
-        android:id="@+id/elden"
+        android:id="@+id/logo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="253dp"
         android:layout_gravity="center"
         android:layout_margin="50dp"
-        android:src="@drawable/logoengenhariadesoftwarell" />
+        android:src="@drawable/biologo" />
 
     <EditText
         android:id="@+id/email"
@@ -47,10 +48,12 @@
         android:background="@drawable/borda_escura_gradiente"
         android:hint="E-mail"
         android:textAlignment="center"
-        android:textColorHint="@color/black" />
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"/>
 
     <EditText
-        android:id="@+id/senha"
+        android:id="@+id/Senha"
+        android:inputType="textPassword"
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
@@ -58,7 +61,8 @@
         android:layout_margin="15dp"
         android:hint="Senha"
         android:textAlignment="center"
-        android:textColorHint="@color/black"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
         />
 
     <Button
@@ -69,16 +73,16 @@
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:textColor="@color/white"
-        android:backgroundTint="@color/verdeclaro"
+        android:backgroundTint="@color/azulPetroleo"
         />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttoncadastro"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Cadastrar-se"
         android:layout_gravity="center"
         android:textColor="@color/white"
-        android:backgroundTint="@color/verdeclaro"
+        android:backgroundTint="@color/azulPetroleo"
         />
 </LinearLayout>

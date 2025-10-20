@@ -12,15 +12,42 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetoEngenhariaDeSoftwareII"
         tools:targetApi="31">
+
+        <!-- Activity de entrada (Tela inicial) -->
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Tela de login -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true" />
+
+        <!-- Tela de cadastro -->
+        <activity
+            android:name=".CadastroUsuarioActivity"
+            android:exported="true" />
+
+        <!-- Tela de hoje -->
+        <activity
+            android:name=".todayActivity"
+            android:exported="true" />
+
+        <!-- Tela de edição de dieta -->
+        <activity
+            android:name=".EditarDietaActivity"
+            android:exported="false" />
+
+        <!-- Menu principal -->
+        <activity
+            android:name=".MenuActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
