@@ -54,7 +54,7 @@ public class EditarDietaActivity extends AppCompatActivity {
         // --- botão salvar ---
         findViewById(R.id.btnSalvar).setOnClickListener(v -> salvarDieta());
         findViewById(R.id.btnExcluir).setOnClickListener(v -> excluirDieta());
-        findViewById(R.id.btnVoltar).setOnClickListener(v -> finish());
+        findViewById(R.id.btnInicio).setOnClickListener(v -> finish());
 
         configurarMenu();
     }
@@ -109,66 +109,4 @@ public class EditarDietaActivity extends AppCompatActivity {
         finish();
     }
 }
-
-
-//package com.example.projetoengenhariadesoftwareii;
-//
-//import android.content.Intent;
-//import android.os.Bundle;
-//import android.widget.ImageButton;
-//import android.widget.PopupMenu;
-//import android.widget.TextView;
-//import androidx.appcompat.app.AppCompatActivity;
-//
-//public class EditarDietaActivity extends AppCompatActivity {
-//
-//    ImageButton buttonMenu, buttonLogo;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_editar_dieta);
-//
-//        buttonMenu = findViewById(R.id.buttonMenu);
-//        buttonLogo = findViewById(R.id.buttonlogo);
-//
-//        int dia = getIntent().getIntExtra("diaSelecionado", -1);
-//
-//        TextView titulo = new TextView(this);
-//        titulo.setTextSize(22);
-//        titulo.setPadding(20, 30, 20, 30);
-//        titulo.setText("Edição da dieta do dia: " + dia);
-//
-//        configurarMenu();
-//    }
-//
-//    private void configurarMenu() {
-//        buttonMenu.setOnClickListener(v -> {
-//            PopupMenu popupMenu = new PopupMenu(EditarDietaActivity.this, buttonMenu);
-//            popupMenu.getMenuInflater().inflate(R.menu.activity_menu, popupMenu.getMenu());
-//            popupMenu.setOnMenuItemClickListener(item -> {
-//                int id = item.getItemId();
-//                if (id == R.id.opcao1) {
-//                    startActivity(new Intent(this, todayActivity.class));
-//                    return true;
-//                } else if (id == R.id.opcao2) {
-//                    startActivity(new Intent(this, ComprasMesActivity.class));
-//                    return true;
-//                } else if (id == R.id.opcao3) {
-//                    startActivity(new Intent(this, RelatoriosActivity.class));
-//                    return true;
-//                } else if (id == R.id.opcao4) {
-//                    startActivity(new Intent(this, SobreActivity.class));
-//                    return true;
-//                } else if (id == R.id.opcao5) {
-//                    startActivity(new Intent(this, LoginActivity.class));
-//                    return true;
-//                }
-//                return false;
-//            });
-//            popupMenu.show();
-//        });
-//    }
-//
-//}
 

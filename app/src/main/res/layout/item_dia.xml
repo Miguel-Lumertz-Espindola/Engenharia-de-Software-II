@@ -11,7 +11,7 @@
         android:layout_height="60dp"
         android:gravity="center"
         android:text="06"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:background="@drawable/bg_dia_normal"
         android:textSize="20sp"
         android:layout_gravity="center" />
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:text="Dom"
         android:textSize="14sp"
-        android:textColor="@color/azulPetroleo"
+        android:textColor="@color/white"
         android:layout_marginTop="4dp" />
 </LinearLayout>
 

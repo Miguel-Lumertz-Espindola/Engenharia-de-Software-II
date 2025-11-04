@@ -87,7 +87,7 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:padding="8dp"
-        android:background="#C8C1A2"
+        android:background="@drawable/borda_escura_gradiente"
         android:scrollbars="horizontal" />
 
     <!-- REFEIÇÕES DO DIA -->

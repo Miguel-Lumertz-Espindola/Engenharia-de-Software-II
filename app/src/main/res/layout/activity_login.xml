@@ -52,7 +52,8 @@
         android:textColor="@color/white"/>
 
     <EditText
-        android:id="@+id/senha"
+        android:id="@+id/Senha"
+        android:inputType="textPassword"
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
@@ -76,7 +77,7 @@
         />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttoncadastro"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Cadastrar-se"
