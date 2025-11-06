@@ -48,6 +48,14 @@
             android:name=".MenuActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".DietasPreProntasActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".CriarDietaActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

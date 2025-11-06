@@ -25,7 +25,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
                 android:text="Nome dieta"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <TextView
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:text="textoDescriçaodieta"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="10sp" />
 
 

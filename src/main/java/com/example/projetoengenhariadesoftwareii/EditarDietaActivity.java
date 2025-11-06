@@ -2,6 +2,8 @@ package com.example.projetoengenhariadesoftwareii;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
@@ -22,6 +24,8 @@ public class EditarDietaActivity extends AppCompatActivity {
     private int diaSelecionado;
     private DietaDAO dietaDao;
     private Dieta dietaAtual;
+    private Button btnDietaPronta;
+    private Button btnCriarDieta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,8 @@ public class EditarDietaActivity extends AppCompatActivity {
         inputAlmoco = findViewById(R.id.inputAlmoco);
         inputJantar = findViewById(R.id.inputJantar);
         textoDia = findViewById(R.id.textoDiaSelecionado);
+        btnDietaPronta = findViewById(R.id.btnDietaPronta);
+        btnCriarDieta = findViewById(R.id.btnCriarDieta);
 
         dietaDao = AppDatabase.getInstance(this).dietaDAO();
 
@@ -50,6 +56,18 @@ public class EditarDietaActivity extends AppCompatActivity {
             inputAlmoco.setText(dietaAtual.getAlmoco());
             inputJantar.setText(dietaAtual.getJantar());
         }
+
+        btnDietaPronta.setOnClickListener(v -> {
+            // Aqui você decide o que o botão deve fazer
+            Intent intent = new Intent(this, DietasPreProntasActivity.class);
+            startActivity(intent);
+        });
+
+//        btnCriarDieta.setOnClickListener(v -> {
+//            // Aqui você decide o que o botão deve fazer
+//            Intent intent = new Intent(this, CriarDietaActivity.class);
+//            startActivity(intent);
+//        });
 
         // --- botão salvar ---
         findViewById(R.id.btnSalvar).setOnClickListener(v -> salvarDieta());

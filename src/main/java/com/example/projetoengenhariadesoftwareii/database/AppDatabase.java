@@ -8,12 +8,14 @@ import androidx.room.RoomDatabase;
 
 import com.example.projetoengenhariadesoftwareii.database.DAO.DietaDAO;
 import com.example.projetoengenhariadesoftwareii.database.DAO.DietaPreProntaDAO;
+import com.example.projetoengenhariadesoftwareii.database.DAO.IngredienteDAO;
 import com.example.projetoengenhariadesoftwareii.database.DAO.UsuarioDao;
 import com.example.projetoengenhariadesoftwareii.database.model.Dieta;
 import com.example.projetoengenhariadesoftwareii.database.model.DietaPreProntaModel;
+import com.example.projetoengenhariadesoftwareii.database.model.Ingrediente;
 import com.example.projetoengenhariadesoftwareii.database.model.UsuarioModel;
 
-@Database(entities = {Dieta.class, UsuarioModel.class, DietaPreProntaModel.class}, version = 7, exportSchema = false)
+@Database(entities = {Dieta.class, UsuarioModel.class, DietaPreProntaModel.class, Ingrediente.class}, version = 9, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase instancia;
@@ -22,6 +24,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract DietaDAO dietaDAO();
     public abstract UsuarioDao usuarioDao();
     public abstract DietaPreProntaDAO dietaPreProntaDAO();
+    public abstract IngredienteDAO ingredienteDAO(); // ✅ corrigido
 
     // --- Singleton ---
     public static synchronized AppDatabase getInstance(Context context) {
@@ -31,8 +34,8 @@ public abstract class AppDatabase extends RoomDatabase {
                             AppDatabase.class,
                             "app_database"
                     )
-                    .allowMainThreadQueries() // opcional (evite em produção)
-                    .fallbackToDestructiveMigration() // evita crash em mudanças de schema
+                    .allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
                     .build();
         }
         return instancia;
