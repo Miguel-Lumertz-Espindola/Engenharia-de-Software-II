@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".todayActivity"
+    android:background="@color/white">
+
+    <!-- CABEÇALHO SUPERIOR -->
+    <LinearLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/azulEsverdeado"
+        android:padding="7dp">
+
+        <ImageButton
+            android:id="@+id/buttonlogo"
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/logobranco"
+            android:scaleType="fitCenter"
+            android:contentDescription="Logo BioBalance" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="BioBalance"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+
+        <ImageButton
+            android:id="@+id/buttonMenu"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="Menu"
+            android:src="@drawable/menu"
+            android:scaleType="centerInside"
+          android:adjustViewBounds="true"
+          android:background="@null"     />
+    </LinearLayout>
+
+    <!-- SEÇÃO DE MÊS E SEMANA -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="#E9F5F3">
+
+        <ImageButton
+            android:id="@+id/btnSemanaAnterior"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_arrow_left" />
+
+        <TextView
+            android:id="@+id/textoMesSemana"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Outubro - Semana 1"
+            android:textColor="@color/azulPetroleo"
+            android:textSize="20sp"
+            android:paddingHorizontal="12dp" />
+
+        <ImageButton
+            android:id="@+id/btnProximaSemana"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_arrow_right" />
+    </LinearLayout>
+
+    <!-- LISTA DE DIAS -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerDias"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:padding="8dp"
+        android:background="@drawable/borda_escura_gradiente"
+        android:scrollbars="horizontal" />
+
+    <!-- REFEIÇÕES DO DIA -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/layoutRefeicoes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:dividerHeight="8dp" />
+
+            <Button
+                android:id="@+id/btnEditarDieta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Editar dieta"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
+                android:backgroundTint="@color/azulPetroleo"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:padding="12dp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".todayActivity"-->
+<!--    android:orientation="vertical">-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@color/azulEsverdeado"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:padding="7dp">-->
+
+<!--        <ImageButton-->
+
+<!--            android:id="@+id/buttonlogo"-->
+<!--            android:layout_width="75dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--            android:contentDescription="Logo Biobalance"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            android:src="@drawable/logobranco" />-->
+
+<!--        <TextView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:gravity="center"-->
+<!--            android:text="BioBalance"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="25sp"-->
+<!--            />-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/buttonMenu"-->
+<!--            android:layout_width="60dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:contentDescription="Mais opções"-->
+<!--            android:src="@drawable/menu1"/>-->
+<!--    </LinearLayout>-->
+
+<!--    &lt;!&ndash; CONTEÚDO COM SCROLL &ndash;&gt;-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:padding="12dp"-->
+<!--        android:background="#FFEDAF">-->
+
+<!--        <ListView-->
+<!--            android:id="@+id/listaDias"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:divider="@color/azulPetroleo"-->
+<!--            android:dividerHeight="1dp" />-->
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_weight="1"-->
+<!--        android:orientation="vertical"-->
+<!--        android:background="@color/white">-->
+
+
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/compras_content_recyclerview"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="@color/white"-->
+<!--            android:paddingTop="8dp" />-->
+
+<!--    </LinearLayout>-->
+
+<!--&lt;!&ndash;    <LinearLayout&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_height="90dp"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:orientation="horizontal"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:background="@color/Vinho"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:gravity="left|center">&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <Button android:id="@+id/Botao_inicio" android:layout_width="0dp" android:layout_height="75dp" android:layout_weight="1" android:backgroundTint="@color/Dorado" android:text="inicio" android:textColor="@color/Vinho_escuro" android:textSize="11sp" android:layout_margin="3dp"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <Button android:id="@+id/botao_carrinho" android:layout_width="0dp" android:layout_height="75dp" android:layout_weight="1" android:backgroundTint="@color/Dorado" android:text="carrinho" android:textColor="@color/Vinho_escuro" android:textSize="11sp" android:layout_margin="3dp"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <Button android:id="@+id/Botao_produtos" android:layout_width="0dp" android:layout_height="75dp" android:layout_weight="1.03" android:backgroundTint="@color/Dorado" android:text="produtos" android:textColor="@color/Vinho_escuro" android:textSize="11sp" android:layout_margin="3dp"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <Button android:id="@+id/botao_pedidos" android:layout_width="0dp" android:layout_height="75dp" android:layout_weight="1" android:backgroundTint="@color/Dorado" android:text="pedidos" android:textColor="@color/Vinho_escuro" android:textSize="11sp" android:layout_margin="3dp"/>&ndash;&gt;-->
+<!--&lt;!&ndash;    </LinearLayout>&ndash;&gt;-->
+<!--</LinearLayout>-->
+
