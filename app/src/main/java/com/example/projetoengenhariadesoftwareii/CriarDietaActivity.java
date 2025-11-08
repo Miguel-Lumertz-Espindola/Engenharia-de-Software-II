@@ -168,32 +168,65 @@ public class CriarDietaActivity extends AppCompatActivity {
         View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_adicionar_ingrediente, null);
         Spinner spinner = dialogView.findViewById(R.id.spinnerIngredientes);
         EditText inputQtd = dialogView.findViewById(R.id.inputQuantidade);
+        TextView textDescricao = dialogView.findViewById(R.id.textDescricaoIngrediente);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item,
                 getNomesIngredientes(ingredientes));
         spinner.setAdapter(adapter);
 
-        new AlertDialog.Builder(this)
+        // Exibe a descrição do primeiro ingrediente
+        textDescricao.setText(ingredientes.get(0).getDescricao());
+        textDescricao.setVisibility(View.VISIBLE);
+
+        // Atualiza descrição ao trocar ingrediente no spinner
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                textDescricao.setText(ingredientes.get(position).getDescricao());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Adicionar Ingrediente")
                 .setView(dialogView)
                 .setPositiveButton("Adicionar", (d, w) -> {
                     int pos = spinner.getSelectedItemPosition();
                     Ingrediente ing = ingredientes.get(pos);
                     String qtd = inputQtd.getText().toString();
+
                     if (qtd.isEmpty()) {
                         Toast.makeText(this, "Informe a quantidade!", Toast.LENGTH_SHORT).show();
                         return;
                     }
+
+                    List<String> listaRefeicao = refeicoes.get(tipo);
+                    for (String item : listaRefeicao) {
+                        if (item.startsWith(ing.getNome() + " ")) {
+                            Toast.makeText(this, "Ingrediente já adicionado nesta refeição!", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
+
                     String texto = ing.getNome() + " - " + qtd + " " + ing.getUnidade();
-                    refeicoes.get(tipo).add(texto);
+                    listaRefeicao.add(texto);
                     TextView tv = new TextView(this);
                     tv.setText(texto);
                     container.addView(tv);
                 })
                 .setNegativeButton("Cancelar", null)
-                .show();
+                .create();
+
+        dialog.show();
+
+
+        // 👇 Define o background do diálogo inteiro
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_dialog_02);
     }
+
 
     private List<String> getNomesIngredientes(List<Ingrediente> lista) {
         List<String> nomes = new ArrayList<>();
@@ -215,6 +248,7 @@ public class CriarDietaActivity extends AppCompatActivity {
         }
 
         Toast.makeText(this, "Dietas salvas com sucesso!", Toast.LENGTH_SHORT).show();
+        setResult(RESULT_OK);
         finish();
     }
 
@@ -255,3 +289,261 @@ public class CriarDietaActivity extends AppCompatActivity {
     }
 
 }
+
+//package com.example.projetoengenhariadesoftwareii;
+//
+//import android.app.AlertDialog;
+//import android.content.Intent;
+//import android.os.Bundle;
+//import android.view.LayoutInflater;
+//import android.view.View;
+//import android.widget.*;
+//import androidx.appcompat.app.AppCompatActivity;
+//import androidx.recyclerview.widget.LinearLayoutManager;
+//import androidx.recyclerview.widget.RecyclerView;
+//import com.example.projetoengenhariadesoftwareii.database.*;
+//import com.example.projetoengenhariadesoftwareii.database.DAO.DietaDAO;
+//import com.example.projetoengenhariadesoftwareii.database.DAO.IngredienteDAO;
+//import com.example.projetoengenhariadesoftwareii.database.model.Dieta;
+//import com.example.projetoengenhariadesoftwareii.database.model.Ingrediente;
+//
+//import java.util.*;
+//
+//public class CriarDietaActivity extends AppCompatActivity {
+//
+//    private AppDatabase db;
+//    ImageButton buttonMenu, buttonLogo;
+//    private IngredienteDAO ingredienteDAO;
+//    private DietaDAO dietaDAO;
+//
+//    private LinearLayout layoutCafe, layoutAlmoco, layoutJantar;
+//    private Button btnAddCafe, btnAddAlmoco, btnAddJantar, btnAdicionarDietas;
+//    private RecyclerView recyclerDias;
+//    private Calendar calendario = Calendar.getInstance();
+//    private List<DiaItem> diasDoMes = new ArrayList<>();
+//    private int mesAtual, anoAtual, diaHoje, semanaAtual = 1;
+//    private TextView textoMesSemana;
+//    private Set<Integer> diasSelecionados = new HashSet<>();
+//    private Map<String, List<String>> refeicoes = new HashMap<>();
+//    private DiaAdapter diaAdapter;
+//
+//    private final String[] nomesDias = {"Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"};
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_criar_dieta);
+//
+//        buttonMenu = findViewById(R.id.buttonMenu);
+//        buttonLogo = findViewById(R.id.buttonlogo);
+//
+//        // Inicializa datas
+//        calendario = Calendar.getInstance(TimeZone.getTimeZone("America/Sao_Paulo"));
+//        mesAtual = calendario.get(Calendar.MONTH);
+//        anoAtual = calendario.get(Calendar.YEAR);
+//        diaHoje = calendario.get(Calendar.DAY_OF_MONTH);
+//
+//        textoMesSemana = findViewById(R.id.textoMesSemana);
+//
+//        db = AppDatabase.getInstance(this);
+//        ingredienteDAO = db.ingredienteDAO();
+//        dietaDAO = db.dietaDAO();
+//
+//        layoutCafe = findViewById(R.id.layoutCafe);
+//        layoutAlmoco = findViewById(R.id.layoutAlmoco);
+//        layoutJantar = findViewById(R.id.layoutJantar);
+//
+//        btnAddCafe = findViewById(R.id.btnAddCafe);
+//        btnAddAlmoco = findViewById(R.id.btnAddAlmoco);
+//        btnAddJantar = findViewById(R.id.btnAddJantar);
+//        btnAdicionarDietas = findViewById(R.id.btnAdicionarDietas);
+//
+//        recyclerDias = findViewById(R.id.recyclerDias);
+//        recyclerDias.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+//
+//        // Gera todos os dias do mês
+//        diasDoMes = gerarDiasDoMes(mesAtual, anoAtual);
+//
+//        // Cria adapter inicial com a primeira semana
+//        List<DiaItem> primeiraSemana = getSubListaSemana(1);
+//        diaAdapter = new DiaAdapter(primeiraSemana, diasSelecionados, dia -> {
+//            if (!diasSelecionados.contains(dia)) {
+//                diasSelecionados.add(dia);
+//            } else {
+//                diasSelecionados.remove(dia);
+//            }
+//            diaAdapter.notifyDataSetChanged();
+//        });
+//
+//        recyclerDias.setAdapter(diaAdapter);
+//        atualizarTextoMesSemana();
+//
+//        // Botões de navegação entre semanas
+//        findViewById(R.id.btnSemanaAnterior).setOnClickListener(v -> {
+//            if (semanaAtual > 1) {
+//                semanaAtual--;
+//                irParaSemana(semanaAtual);
+//            }
+//        });
+//
+//        findViewById(R.id.btnProximaSemana).setOnClickListener(v -> {
+//            int totalSemanas = (int) Math.ceil(diasDoMes.size() / 7.0);
+//            if (semanaAtual < totalSemanas) {
+//                semanaAtual++;
+//                irParaSemana(semanaAtual);
+//            }
+//        });
+//
+//        // Inicializa mapas de refeição
+//        refeicoes.put("cafe", new ArrayList<>());
+//        refeicoes.put("almoco", new ArrayList<>());
+//        refeicoes.put("jantar", new ArrayList<>());
+//
+//        btnAddCafe.setOnClickListener(v -> abrirDialogIngrediente("cafe", layoutCafe));
+//        btnAddAlmoco.setOnClickListener(v -> abrirDialogIngrediente("almoco", layoutAlmoco));
+//        btnAddJantar.setOnClickListener(v -> abrirDialogIngrediente("jantar", layoutJantar));
+//
+//        btnAdicionarDietas.setOnClickListener(v -> salvarDietasSelecionadas());
+//
+//        // Preenche ingredientes se estiver vazio
+//        if (ingredienteDAO.listarTodos().isEmpty()) {
+//            prePopularIngredientes();
+//        }
+//        configurarMenu();
+//    }
+//
+//    private List<DiaItem> gerarDiasDoMes(int mes, int ano) {
+//        List<DiaItem> dias = new ArrayList<>();
+//        Calendar cal = Calendar.getInstance();
+//        cal.set(Calendar.YEAR, ano);
+//        cal.set(Calendar.MONTH, mes);
+//        int totalDias = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+//
+//        for (int i = 1; i <= totalDias; i++) {
+//            cal.set(Calendar.DAY_OF_MONTH, i);
+//            int diaSemana = cal.get(Calendar.DAY_OF_WEEK);
+//            boolean isHoje = (i == diaHoje && mes == calendario.get(Calendar.MONTH) && ano == calendario.get(Calendar.YEAR));
+//            dias.add(new DiaItem(i, nomesDias[diaSemana - 1], isHoje));
+//        }
+//        return dias;
+//    }
+//
+//    private List<DiaItem> getSubListaSemana(int semana) {
+//        int inicio = (semana - 1) * 7;
+//        int fim = Math.min(inicio + 7, diasDoMes.size());
+//        return new ArrayList<>(diasDoMes.subList(inicio, fim));
+//    }
+//
+//    private void irParaSemana(int semana) {
+//        List<DiaItem> subLista = getSubListaSemana(semana);
+//        diaAdapter.atualizarLista(subLista);
+//        atualizarTextoMesSemana();
+//    }
+//
+//    private void atualizarTextoMesSemana() {
+//        textoMesSemana.setText(getNomeMes(mesAtual) + " - Semana " + semanaAtual);
+//    }
+//
+//    private String getNomeMes(int mes) {
+//        String[] nomes = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+//                "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"};
+//        return nomes[mes];
+//    }
+//
+//    private void abrirDialogIngrediente(String tipo, LinearLayout container) {
+//        List<Ingrediente> ingredientes = ingredienteDAO.listarTodos();
+//        if (ingredientes.isEmpty()) {
+//            Toast.makeText(this, "Nenhum ingrediente cadastrado!", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//
+//        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_adicionar_ingrediente, null);
+//        Spinner spinner = dialogView.findViewById(R.id.spinnerIngredientes);
+//        EditText inputQtd = dialogView.findViewById(R.id.inputQuantidade);
+//
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+//                android.R.layout.simple_spinner_dropdown_item,
+//                getNomesIngredientes(ingredientes));
+//        spinner.setAdapter(adapter);
+//
+//        new AlertDialog.Builder(this)
+//                .setTitle("Adicionar Ingrediente")
+//                .setView(dialogView)
+//                .setPositiveButton("Adicionar", (d, w) -> {
+//                    int pos = spinner.getSelectedItemPosition();
+//                    Ingrediente ing = ingredientes.get(pos);
+//                    String qtd = inputQtd.getText().toString();
+//                    if (qtd.isEmpty()) {
+//                        Toast.makeText(this, "Informe a quantidade!", Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+//                    String texto = ing.getNome() + " - " + qtd + " " + ing.getUnidade();
+//                    refeicoes.get(tipo).add(texto);
+//                    TextView tv = new TextView(this);
+//                    tv.setText(texto);
+//                    container.addView(tv);
+//                })
+//                .setNegativeButton("Cancelar", null)
+//                .show();
+//    }
+//
+//    private List<String> getNomesIngredientes(List<Ingrediente> lista) {
+//        List<String> nomes = new ArrayList<>();
+//        for (Ingrediente i : lista) nomes.add(i.getNome());
+//        return nomes;
+//    }
+//
+//    private void salvarDietasSelecionadas() {
+//        if (diasSelecionados.isEmpty()) {
+//            Toast.makeText(this, "Selecione ao menos um dia!", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//
+//        for (int dia : diasSelecionados) {
+//            String cafe = String.join("\n", refeicoes.get("cafe"));
+//            String almoco = String.join("\n", refeicoes.get("almoco"));
+//            String jantar = String.join("\n", refeicoes.get("jantar"));
+//            dietaDAO.salvarDieta(new Dieta(dia, cafe, almoco, jantar));
+//        }
+//
+//        Toast.makeText(this, "Dietas salvas com sucesso!", Toast.LENGTH_SHORT).show();
+//        finish();
+//    }
+//
+//    private void prePopularIngredientes() {
+//        ingredienteDAO.inserirIngrediente(new Ingrediente("Arroz", "Base de carboidrato", "gramas"));
+//        ingredienteDAO.inserirIngrediente(new Ingrediente("Frango", "Proteína magra", "gramas"));
+//        ingredienteDAO.inserirIngrediente(new Ingrediente("Banana", "Fonte de potássio", "unidades"));
+//        ingredienteDAO.inserirIngrediente(new Ingrediente("Leite", "Fonte de cálcio", "ml"));
+//        ingredienteDAO.inserirIngrediente(new Ingrediente("Ovos", "Fonte de proteína", "unidades"));
+//    }
+//
+//    private void configurarMenu() {
+//        buttonMenu.setOnClickListener(v -> {
+//            PopupMenu popupMenu = new PopupMenu(CriarDietaActivity.this, buttonMenu);
+//            popupMenu.getMenuInflater().inflate(R.menu.activity_menu, popupMenu.getMenu());
+//            popupMenu.setOnMenuItemClickListener(item -> {
+//                int id = item.getItemId();
+//                if (id == R.id.opcao1) {
+//                    startActivity(new Intent(this, todayActivity.class));
+//                    return true;
+//                } else if (id == R.id.opcao2) {
+//                    startActivity(new Intent(this, ComprasMesActivity.class));
+//                    return true;
+//                } else if (id == R.id.opcao3) {
+//                    startActivity(new Intent(this, RelatoriosActivity.class));
+//                    return true;
+//                } else if (id == R.id.opcao4) {
+//                    startActivity(new Intent(this, SobreActivity.class));
+//                    return true;
+//                } else if (id == R.id.opcao5) {
+//                    startActivity(new Intent(this, LoginActivity.class));
+//                    return true;
+//                }
+//                return false;
+//            });
+//            popupMenu.show();
+//        });
+//    }
+//
+//}
