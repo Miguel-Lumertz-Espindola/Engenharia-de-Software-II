@@ -1,0 +1,33 @@
+<resources>
+    <string name="objetivo_prompt">Selecione o objetivo</string>
+    <string name="atividade_prompt">Selecione o nível de atividade</string>
+    <string name="praticidade_prompt">Selecione o nível de praticidade</string>
+    <string name="rigor_prompt">Selecione o nível de rigor</string>
+
+    <string-array name="opcoes_objetivo">
+        <item>Emagrecimento</item>
+        <item>Ganho de massa</item>
+        <item>Manutenção de peso</item>
+        <item>Melhorar saúde geral</item>
+    </string-array>
+
+    <string-array name="opcoes_atividade">
+        <item>Sedentário</item>
+        <item>Leve</item>
+        <item>Moderado</item>
+        <item>Intenso</item>
+    </string-array>
+
+    <string-array name="opcoes_praticidade">
+        <item>Baixa</item>
+        <item>Média</item>
+        <item>Alta</item>
+    </string-array>
+
+    <string-array name="opcoes_rigor">
+        <item>Leve</item>
+        <item>Moderado</item>
+        <item>Rigoroso</item>
+    </string-array>
+
+</resources>
