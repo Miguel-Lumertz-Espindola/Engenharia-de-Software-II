@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="#FAFAFA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Barra superior -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/azulEsverdeado"
+            android:orientation="horizontal"
+            android:padding="7dp"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="BioBalance"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Conteúdo -->
+        <TextView
+            android:text="Cadastro do Usuário"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/Nome"
+            android:hint="Nome"
+            android:inputType="textPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp" />
+
+        <EditText
+            android:id="@+id/Idade"
+            android:hint="Idade"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp" />
+
+
+        <EditText
+            android:id="@+id/etAltura"
+            android:hint="Altura (em metros, ex: 1.75)"
+            android:inputType="numberDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp" />
+
+        <EditText
+            android:id="@+id/etPeso"
+            android:hint="Peso (em kg)"
+            android:inputType="numberDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp" />
+
+        <RadioGroup
+            android:id="@+id/rgSexo"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp">
+
+            <RadioButton
+                android:id="@+id/rbMasculino"
+                android:text="Masculino"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/rbFeminino"
+                android:text="Feminino"
+                android:layout_marginStart="20dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/tvIMC"
+            android:text="IMC: ________"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnCalcular"
+            android:text="Calcular IMC"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/testo1"
+            android:text="Objetivo:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- Objetivo principal -->
+        <Spinner
+            android:id="@+id/spObjetivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:entries="@array/opcoes_objetivo"
+            android:prompt="@string/objetivo_prompt" />
+
+        <TextView
+            android:id="@+id/testo2"
+            android:text="Frequencia que se exercita:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- Nível de atividade física -->
+        <Spinner
+            android:id="@+id/spAtividade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:entries="@array/opcoes_atividade"
+            android:prompt="@string/atividade_prompt" />
+
+        <TextView
+            android:id="@+id/testo3"
+            android:text="Nivel de praticidade:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <!-- Praticidade no dia a dia -->
+        <Spinner
+            android:id="@+id/spPraticidade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:entries="@array/opcoes_praticidade"
+            android:prompt="@string/praticidade_prompt" />
+
+        <TextView
+            android:id="@+id/testo4"
+            android:text="Rigor que seguira na dieta:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- Rigor da dieta -->
+        <Spinner
+            android:id="@+id/spRigor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:entries="@array/opcoes_rigor"
+            android:prompt="@string/rigor_prompt" />
+
+        <!-- Orçamento mensal -->
+        <EditText
+            android:id="@+id/etOrcamento"
+            android:hint="Orçamento mensal (R$)"
+            android:inputType="numberDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" />
+
+        <EditText
+            android:id="@+id/Email"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:id="@+id/Senha"
+            android:hint="Senha"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" />
+
+
+        <Button
+            android:id="@+id/btnSalvar"
+            android:text="Salvar Cadastro"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</ScrollView>
