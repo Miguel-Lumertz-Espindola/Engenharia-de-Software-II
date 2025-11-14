@@ -80,6 +80,12 @@
                 android:lines="5"
                 android:imeOptions="actionDone"/>
 
+            <Button
+                android:id="@+id/btnHorarioCafe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alterar horário" />
+
             <EditText
                 android:id="@+id/inputAlmoco"
                 android:layout_width="match_parent"
@@ -91,6 +97,12 @@
                 android:imeOptions="actionDone"
                 android:layout_marginTop="10dp" />
 
+            <Button
+                android:id="@+id/btnHorarioAlmoco"
+                android:text="Alterar horário"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
             <EditText
                 android:id="@+id/inputJantar"
                 android:layout_width="match_parent"
@@ -101,6 +113,12 @@
                 android:lines="5"
                 android:imeOptions="actionDone"
                 android:layout_marginTop="10dp" />
+
+            <Button
+                android:id="@+id/btnHorarioJantar"
+                android:text="Alterar horário"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </ScrollView>
 
