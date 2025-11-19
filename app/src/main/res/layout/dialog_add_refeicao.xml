@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/inputTipoRefeicao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tipo (ex: Café da manhã, Almoço, Jantar)"/>
+
+    <EditText
+        android:id="@+id/inputNomeRefeicao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nome da refeição"
+        android:layout_marginTop="8dp"/>
+
+    <EditText
+        android:id="@+id/inputHorarioRefeicao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:hint="Horário (toque para escolher)"
+        android:layout_marginTop="8dp"/>
+</LinearLayout>

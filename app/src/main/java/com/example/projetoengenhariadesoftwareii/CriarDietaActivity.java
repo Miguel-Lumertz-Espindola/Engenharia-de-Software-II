@@ -121,6 +121,8 @@ public class CriarDietaActivity extends AppCompatActivity {
         configurarMenu();
     }
 
+    //FORA DO ONCREATE:
+
     private List<DiaItem> gerarDiasDoMes(int mes, int ano) {
         List<DiaItem> dias = new ArrayList<>();
         Calendar cal = Calendar.getInstance();

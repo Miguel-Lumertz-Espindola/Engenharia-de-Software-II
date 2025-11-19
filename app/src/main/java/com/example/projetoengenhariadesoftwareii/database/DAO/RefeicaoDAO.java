@@ -1,10 +1,10 @@
 package com.example.projetoengenhariadesoftwareii.database.DAO;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
-import androidx.room.Delete;
 
 import com.example.projetoengenhariadesoftwareii.database.model.Refeicao;
 
@@ -12,19 +12,53 @@ import java.util.List;
 
 @Dao
 public interface RefeicaoDAO {
+    @Query("SELECT * FROM refeicoes WHERE dia = :dia ORDER BY id ASC")
+    List<Refeicao> getRefeicoesPorDia(int dia);
 
     @Insert
-    long insert(Refeicao r);
+    long inserirRefeicao(Refeicao refeicao);
 
     @Update
-    void update(Refeicao r);
+    void atualizarRefeicao(Refeicao refeicao);
 
     @Delete
-    void delete(Refeicao r);
+    void excluirRefeicao(Refeicao refeicao);
 
-    @Query("SELECT * FROM refeicoes WHERE dia = :dia ORDER BY id ASC")
-    List<Refeicao> getByDia(int dia);
+    @Query("SELECT COUNT(*) FROM refeicoes WHERE dia = :dia")
+    int contarPorDia(int dia);
 
     @Query("DELETE FROM refeicoes WHERE dia = :dia")
-    void deleteByDia(int dia);
+    void excluirPorDia(int dia);
+    @Query("SELECT * FROM refeicoes WHERE dia = :dia AND nome = :nome LIMIT 1")
+    Refeicao getRefeicaoPorDiaENome(int dia, String nome);
 }
+
+//package com.example.projetoengenhariadesoftwareii.database.DAO;
+//
+//import androidx.room.Dao;
+//import androidx.room.Delete;
+//import androidx.room.Insert;
+//import androidx.room.Query;
+//import androidx.room.Update;
+//
+//import com.example.projetoengenhariadesoftwareii.database.model.Refeicao;
+//
+//import java.util.List;
+//
+//@Dao
+//public interface RefeicaoDAO {
+//    @Query("SELECT * FROM refeicoes WHERE dia = :dia ORDER BY tipo ASC, horario ASC")
+//    List<Refeicao> getRefeicoesPorDia(int dia);
+//
+//    @Insert
+//    long inserirRefeicao(Refeicao refeicao);
+//
+//    @Update
+//    void atualizarRefeicao(Refeicao refeicao);
+//
+//    @Delete
+//    void excluirRefeicao(Refeicao refeicao);
+//
+//    @Query("DELETE FROM refeicoes WHERE dia = :dia")
+//    void excluirPorDia(int dia);
+//}

@@ -15,9 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.projetoengenhariadesoftwareii.database.AppDatabase;
+import com.example.projetoengenhariadesoftwareii.database.DAO.RefeicaoDAO;
 import com.example.projetoengenhariadesoftwareii.database.model.DietaPreProntaModel;
 import com.example.projetoengenhariadesoftwareii.database.model.Dieta;
 import com.example.projetoengenhariadesoftwareii.database.DAO.DietaDAO;
+import com.example.projetoengenhariadesoftwareii.database.model.Refeicao;
+
 import java.util.*;
 
 public class DietasPreProntasActivity extends AppCompatActivity {
@@ -26,6 +29,7 @@ public class DietasPreProntasActivity extends AppCompatActivity {
     ImageButton buttonMenu, buttonLogo;
     private AppDatabase db;
     private DietaDAO dietaDAO;
+    private RefeicaoDAO refeicaoDao;
 
     // 🔹 Mini agenda
     private Calendar calendario;
@@ -54,6 +58,8 @@ public class DietasPreProntasActivity extends AppCompatActivity {
         dietaDAO = db.dietaDAO();
 
         db.dietaPreProntaDAO().excluirTodas();
+
+        refeicaoDao = db.RefeicaoDAO(); // <-- ESSA LINHA FALTAVA!
 
         // 🔹 Inicializa agenda
         calendario = Calendar.getInstance(TimeZone.getTimeZone("America/Sao_Paulo"));
@@ -144,10 +150,21 @@ public class DietasPreProntasActivity extends AppCompatActivity {
         String almoco = formatarRefeicao(dieta.getAlmoco());
         String jantar = formatarRefeicao(dieta.getJantar());
 
-        // 🔸 Salvar para cada dia selecionado
+        // 🔹 Salvar para cada dia selecionado
         for (int dia : diasSelecionados) {
+
+            // Salvar dieta na tabela DIETAS
             Dieta nova = new Dieta(dia, cafe, almoco, jantar);
             dietaDAO.salvarDieta(nova);
+
+            // 🔹 SALVAR TAMBÉM NA TABELA DE REFEICOES (EVITA DUPLICAÇÃO)
+            refeicaoDao.excluirPorDia(dia); // limpa antes
+            // Café da manhã
+            refeicaoDao.inserirRefeicao(new Refeicao(dia, "Café da Manhã", "08:00", cafe));
+            // Almoço
+            refeicaoDao.inserirRefeicao(new Refeicao(dia, "Almoço", "12:00", almoco));
+            // Jantar
+            refeicaoDao.inserirRefeicao(new Refeicao(dia, "Jantar", "19:00", jantar));
         }
 
         Toast.makeText(this,

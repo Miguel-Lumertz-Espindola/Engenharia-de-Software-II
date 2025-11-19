@@ -43,6 +43,11 @@
             android:name=".EditarDietaActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".EditarRefeicaoActivity"
+            android:exported="false" />
+
+
         <!-- Menu principal -->
         <activity
             android:name=".MenuActivity"

@@ -174,8 +174,25 @@ public class todayActivity extends AppCompatActivity {
         int diaParaEditar = (diaSelecionadoAtual != -1) ? diaSelecionadoAtual : diaHoje;
         Intent intent = new Intent(this, EditarDietaActivity.class);
         intent.putExtra("diaSelecionado", diaParaEditar);
-        startActivity(intent);
+        startActivityForResult(intent, 1001); // <-- permite detectar quando voltar
+        //startActivity(intent);
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1001) {
+            atualizarRefeicoesDoDia();
+        }
+    }
+
+
+    private void atualizarRefeicoesDoDia() {
+        if (diaSelecionadoAtual == -1) {
+            diaSelecionadoAtual = diaHoje;
+        }
+        mostrarRefeicoesDoDia(diaSelecionadoAtual);
+    }
+
 
     private void configurarMenu() {
         buttonLogo.setOnClickListener(new View.OnClickListener() {
@@ -216,6 +233,7 @@ public class todayActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        atualizarRefeicoesDoDia(); // <-- garante atualização sempre que voltar para esta tela
         if (diaSelecionadoAtual != -1) {
             mostrarRefeicoesDoDia(diaSelecionadoAtual);
         }
