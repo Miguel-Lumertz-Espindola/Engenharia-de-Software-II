@@ -13,8 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projetoengenhariadesoftwareii.database.*;
 import com.example.projetoengenhariadesoftwareii.database.DAO.DietaDAO;
 import com.example.projetoengenhariadesoftwareii.database.DAO.IngredienteDAO;
+import com.example.projetoengenhariadesoftwareii.database.DAO.RefeicaoDAO;
 import com.example.projetoengenhariadesoftwareii.database.model.Dieta;
 import com.example.projetoengenhariadesoftwareii.database.model.Ingrediente;
+import com.example.projetoengenhariadesoftwareii.database.model.Refeicao;
 
 import java.util.*;
 
@@ -122,7 +124,6 @@ public class CriarDietaActivity extends AppCompatActivity {
     }
 
     //FORA DO ONCREATE:
-
     private List<DiaItem> gerarDiasDoMes(int mes, int ano) {
         List<DiaItem> dias = new ArrayList<>();
         Calendar cal = Calendar.getInstance();
@@ -266,16 +267,46 @@ public class CriarDietaActivity extends AppCompatActivity {
             return;
         }
 
+//        for (int dia : diasSelecionados) {
+//            String cafe = String.join("\n", refeicoes.get("cafe"));
+//            String almoco = String.join("\n", refeicoes.get("almoco"));
+//            String jantar = String.join("\n", refeicoes.get("jantar"));
+//            dietaDAO.salvarDieta(new Dieta(dia, cafe, almoco, jantar));
+//        }
+
         for (int dia : diasSelecionados) {
             String cafe = String.join("\n", refeicoes.get("cafe"));
             String almoco = String.join("\n", refeicoes.get("almoco"));
             String jantar = String.join("\n", refeicoes.get("jantar"));
-            dietaDAO.salvarDieta(new Dieta(dia, cafe, almoco, jantar));
+
+            // salva Dieta (mantém a tabela dietas)
+            Dieta d = new Dieta(dia, cafe, almoco, jantar);
+            dietaDAO.salvarDieta(d);
+
+            // sincroniza com refeicoes (inserir ou atualizar por nome)
+            RefeicaoDAO rDao = db.RefeicaoDAO();
+
+            upsertRefeicao(rDao, dia, "Café da Manhã", "08:00", cafe);
+            upsertRefeicao(rDao, dia, "Almoço", "12:00", almoco);
+            upsertRefeicao(rDao, dia, "Jantar", "19:00", jantar);
         }
+
 
         Toast.makeText(this, "Dietas salvas com sucesso!", Toast.LENGTH_SHORT).show();
         setResult(RESULT_OK);
         finish();
+    }
+
+    private void upsertRefeicao(RefeicaoDAO rDao, int dia, String nome, String horario, String descricao) {
+        Refeicao existente = rDao.getRefeicaoPorDiaENome(dia, nome);
+        if (existente != null) {
+            existente.setHorario(horario);
+            existente.setDescricao(descricao);
+            rDao.atualizarRefeicao(existente);
+        } else {
+            Refeicao nova = new Refeicao(dia, nome, horario, descricao);
+            rDao.inserirRefeicao(nova);
+        }
     }
 
     private void prePopularIngredientes() {

@@ -95,6 +95,7 @@ public class EditarDietaActivity extends AppCompatActivity {
             // você pode fechar ou ficar na tela; eu mantenho na tela
         });
 
+
         // Confirmar exclusão de DIETA inteira
         btnExcluirDieta.setOnClickListener(v -> confirmarExcluirDieta());
 
@@ -143,13 +144,10 @@ public class EditarDietaActivity extends AppCompatActivity {
         }
     }
 
-
     public void recarregarDepoisDoDialog() {
         carregarRefeicoesDoDB();
         adapter.notifyDataSetChanged();
     }
-
-
 
     private void persistirAlteracoes() {
         // 1) deletar removidas
@@ -188,35 +186,6 @@ public class EditarDietaActivity extends AppCompatActivity {
         }
     }
 
-
-//    private void persistirAlteracoes() {
-//        // 1) deletar itens que existiam e foram removidos
-//        List<Integer> idsAtuais = new ArrayList<>();
-//        for (Refeicao r : lista) if (r.getId() != 0) idsAtuais.add(r.getId());
-//
-//        for (Refeicao old : originais) {
-//            if (!idsAtuais.contains(old.getId())) {
-//                refeicaoDao.excluirRefeicao(old);
-//            }
-//        }
-//
-//        // 2) inserir novos e atualizar existentes
-//        for (Refeicao r : lista) {
-//            if (r.getId() == 0) {
-//                long newId = refeicaoDao.inserirRefeicao(r); // se seu DAO for void, ignore
-//                if (newId > 0) r.setId((int) newId);
-//            } else {
-//                refeicaoDao.atualizarRefeicao(r);
-//            }
-//        }
-//
-//        // 3) sincronizar tabela dietas (para compatibilidade com todayActivity)
-//        sincronizarDieta();
-//        // atualiza snapshot originais
-//        carregarRefeicoesDoDB();
-//        adapter.notifyDataSetChanged();
-//    }
-
     private void sincronizarDietaCorreta() {
         String cafe = "";
         String almoco = "";
@@ -239,7 +208,6 @@ public class EditarDietaActivity extends AppCompatActivity {
         Dieta d = new Dieta(diaSelecionado, cafe, almoco, jantar);
         dietaDao.salvarDieta(d);
     }
-
 
     private String append(String base, String entry) {
         if (base == null || base.isEmpty()) return entry;

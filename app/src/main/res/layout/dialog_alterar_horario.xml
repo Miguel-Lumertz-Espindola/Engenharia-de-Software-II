@@ -20,17 +20,40 @@
         android:layout_height="wrap_content" />
 
     <TextView
-        android:text="Aplicar em quais dias?"
+        android:id="@+id/textoMesSemana"
+        android:text="Mês - Semana 1"
         android:textSize="16sp"
         android:layout_marginTop="15dp"
-        android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerDiasHorario"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnVoltar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/voltar_texto"
+            />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerDiasHorario"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="80dp"
+            android:padding="5dp" />
+
+        <Button
+            android:id="@+id/btnProximaSemana"
+            android:text=">"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnSalvarHorarioDialog"

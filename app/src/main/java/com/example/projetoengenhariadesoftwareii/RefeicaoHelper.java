@@ -38,36 +38,42 @@ public class RefeicaoHelper {
         // 🔹 2. BUSCA DIETAS (CriarDieta e DietasPreProntas)
         Dieta dieta = dietaDAO.getDietaPorDia(dia);
 
-        // 🔹 SE EXISTE DIETA, ADICIONA NO FINAL DA LISTA DE REFEIÇÕES
+        // agora mesclar sem duplicar
         if (dieta != null) {
-            // Café da manhã
-            if (dieta.getCafeManha() != null && !dieta.getCafeManha().isEmpty()) {
-                refeicoes.add(new Refeicao(
-                        dia,
-                        "Café da Manhã (Dieta)",
-                        dieta.getHorarioCafe() != null ? dieta.getHorarioCafe() : "08:00",
-                        dieta.getCafeManha()
-                ));
-            }
+            // helper para normalizar nome
+            String[][] pares = {
+                    {"Café da Manhã", dieta.getCafeManha(), "08:00"},
+                    {"Almoço", dieta.getAlmoco(), "12:00"},
+                    {"Jantar", dieta.getJantar(), "19:00"}
+            };
 
-            // Almoço
-            if (dieta.getAlmoco() != null && !dieta.getAlmoco().isEmpty()) {
-                refeicoes.add(new Refeicao(
-                        dia,
-                        "Almoço (Dieta)",
-                        dieta.getHorarioAlmoco() != null ? dieta.getHorarioAlmoco() : "12:00",
-                        dieta.getAlmoco()
-                ));
-            }
+            for (String[] p : pares) {
+                String nomeBase = p[0];
+                String conteudo = p[1];
+                String horarioPadrao = p[2];
 
-            // Jantar
-            if (dieta.getJantar() != null && !dieta.getJantar().isEmpty()) {
-                refeicoes.add(new Refeicao(
-                        dia,
-                        "Jantar (Dieta)",
-                        dieta.getHorarioJantar() != null ? dieta.getHorarioJantar() : "19:00",
-                        dieta.getJantar()
-                ));
+                if (conteudo == null || conteudo.trim().isEmpty()) continue;
+
+                // procurar por refeição existente com nome que contenha a raiz (ignora sufixos)
+                boolean encontrou = false;
+                for (Refeicao rr : refeicoes) {
+                    String nomeLower = rr.getNome() == null ? "" : rr.getNome().toLowerCase();
+                    if (nomeLower.contains(nomeBase.toLowerCase()) || nomeBase.toLowerCase().contains(nomeLower)) {
+                        // atualiza descrição se estiver vazio ou for placeholder
+                        if (rr.getDescricao() == null || rr.getDescricao().isEmpty() || rr.getDescricao().startsWith("Café") || rr.getDescricao().startsWith("Almoço")) {
+                            rr.setDescricao(conteudo);
+                        }
+                        if (rr.getHorario() == null || rr.getHorario().isEmpty()) {
+                            rr.setHorario(horarioPadrao);
+                        }
+                        encontrou = true;
+                        break;
+                    }
+                }
+                if (!encontrou) {
+                    // adicionar como Refeição derivada da Dieta (apenas para exibição)
+                    refeicoes.add(new Refeicao(dia, nomeBase, horarioPadrao, conteudo));
+                }
             }
         }
 

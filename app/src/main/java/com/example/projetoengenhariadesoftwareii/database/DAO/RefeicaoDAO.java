@@ -12,7 +12,7 @@ import java.util.List;
 
 @Dao
 public interface RefeicaoDAO {
-    @Query("SELECT * FROM refeicoes WHERE dia = :dia ORDER BY id ASC")
+    @Query("SELECT * FROM refeicoes WHERE dia = :dia ORDER BY horario ASC")
     List<Refeicao> getRefeicoesPorDia(int dia);
 
     @Insert
@@ -29,8 +29,12 @@ public interface RefeicaoDAO {
 
     @Query("DELETE FROM refeicoes WHERE dia = :dia")
     void excluirPorDia(int dia);
+
     @Query("SELECT * FROM refeicoes WHERE dia = :dia AND nome = :nome LIMIT 1")
     Refeicao getRefeicaoPorDiaENome(int dia, String nome);
+
+    @Query("UPDATE refeicoes SET horario = :horario, descricao = :descricao WHERE id = :id")
+    void atualizarHorarioEDescricaoPorId(int id, String horario, String descricao);
 }
 
 //package com.example.projetoengenhariadesoftwareii.database.DAO;

@@ -30,4 +30,6 @@
         <item>Rigoroso</item>
     </string-array>
 
+    <string name="voltar_texto">&lt; Voltar</string>
+
 </resources>
