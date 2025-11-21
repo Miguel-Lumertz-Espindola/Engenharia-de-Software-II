@@ -44,6 +44,7 @@ public class RefeicaoHelper {
             String[][] pares = {
                     {"Café da Manhã", dieta.getCafeManha(), "08:00"},
                     {"Almoço", dieta.getAlmoco(), "12:00"},
+                    {"Café da Tarde", dieta.getCafeTarde(), "15:00"},
                     {"Jantar", dieta.getJantar(), "19:00"}
             };
 
@@ -82,6 +83,7 @@ public class RefeicaoHelper {
             refeicoes = new ArrayList<>();
             refeicoes.add(new Refeicao(dia, "Café da Manhã", "08:00", "Frutas, ovos e café preto."));
             refeicoes.add(new Refeicao(dia, "Almoço", "12:00", "Arroz, feijão, frango e salada."));
+            refeicoes.add(new Refeicao(dia, "Café da Tarde", "15:00", "Arroz, feijão, frango e salada."));
             refeicoes.add(new Refeicao(dia, "Jantar", "19:00", "Sopa de legumes e suco natural."));
         }
 

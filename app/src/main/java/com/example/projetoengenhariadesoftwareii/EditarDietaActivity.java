@@ -121,6 +121,7 @@ public class EditarDietaActivity extends AppCompatActivity {
                 // Criar refeições a partir da DIETA (vem da DietaPréPronta)
                 refeicaoDao.inserirRefeicao(new Refeicao(diaSelecionado, "Café da Manhã", "08:00", d.getCafeManha()));
                 refeicaoDao.inserirRefeicao(new Refeicao(diaSelecionado, "Almoço", "12:00", d.getAlmoco()));
+                refeicaoDao.inserirRefeicao(new Refeicao(diaSelecionado, "Café da Tarde", "15:00", d.getCafeTarde()));
                 refeicaoDao.inserirRefeicao(new Refeicao(diaSelecionado, "Jantar", "19:00", d.getJantar()));
                 doDb = refeicaoDao.getRefeicoesPorDia(diaSelecionado);
             }
@@ -128,10 +129,12 @@ public class EditarDietaActivity extends AppCompatActivity {
                 // Só cria padrão se realmente não existe NADA
                 Refeicao r1 = new Refeicao(diaSelecionado, "Café da Manhã", "08:00", "");
                 Refeicao r2 = new Refeicao(diaSelecionado, "Almoço", "12:00", "");
-                Refeicao r3 = new Refeicao(diaSelecionado, "Jantar", "19:00", "");
+                Refeicao r3 = new Refeicao(diaSelecionado, "Café da Tarde", "15:00", "");
+                Refeicao r4 = new Refeicao(diaSelecionado, "Jantar", "19:00", "");
                 refeicaoDao.inserirRefeicao(r1);
                 refeicaoDao.inserirRefeicao(r2);
                 refeicaoDao.inserirRefeicao(r3);
+                refeicaoDao.inserirRefeicao(r4);
                 doDb = refeicaoDao.getRefeicoesPorDia(diaSelecionado);
             }
         }
@@ -189,6 +192,7 @@ public class EditarDietaActivity extends AppCompatActivity {
     private void sincronizarDietaCorreta() {
         String cafe = "";
         String almoco = "";
+        String cafeTarde = "";
         String jantar = "";
 
         List<Refeicao> todas = refeicaoDao.getRefeicoesPorDia(diaSelecionado);
@@ -202,10 +206,12 @@ public class EditarDietaActivity extends AppCompatActivity {
                 almoco = append(almoco, r.getDescricao());
             } else if (nomeLower.contains("jantar")) {
                 jantar = append(jantar, r.getDescricao());
+            } else if (nomeLower.contains("cafeTarde")) {
+                cafeTarde = append(cafeTarde, r.getDescricao());
             }
         }
         // salva dietas com ingredientes reais
-        Dieta d = new Dieta(diaSelecionado, cafe, almoco, jantar);
+        Dieta d = new Dieta(diaSelecionado, cafe, almoco, cafeTarde, jantar);
         dietaDao.salvarDieta(d);
     }
 

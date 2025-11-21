@@ -27,8 +27,8 @@ public class CriarDietaActivity extends AppCompatActivity {
     private IngredienteDAO ingredienteDAO;
     private DietaDAO dietaDAO;
 
-    private LinearLayout layoutCafe, layoutAlmoco, layoutJantar;
-    private Button btnAddCafe, btnAddAlmoco, btnAddJantar, btnAdicionarDietas;
+    private LinearLayout layoutCafe, layoutAlmoco, layoutJantar, layoutCafeTarde;
+    private Button btnAddCafe, btnAddAlmoco, btnAddCafeTarde, btnAddJantar, btnAdicionarDietas;
     private RecyclerView recyclerDias;
     private Calendar calendario = Calendar.getInstance();
     private List<DiaItem> diasDoMes = new ArrayList<>();
@@ -62,10 +62,12 @@ public class CriarDietaActivity extends AppCompatActivity {
 
         layoutCafe = findViewById(R.id.layoutCafe);
         layoutAlmoco = findViewById(R.id.layoutAlmoco);
+        layoutCafeTarde = findViewById(R.id.layoutCafeTarde);
         layoutJantar = findViewById(R.id.layoutJantar);
 
         btnAddCafe = findViewById(R.id.btnAddCafe);
         btnAddAlmoco = findViewById(R.id.btnAddAlmoco);
+        btnAddCafeTarde = findViewById(R.id.btnAddCafeTarde);
         btnAddJantar = findViewById(R.id.btnAddJantar);
         btnAdicionarDietas = findViewById(R.id.btnAdicionarDietas);
 
@@ -108,10 +110,12 @@ public class CriarDietaActivity extends AppCompatActivity {
         // Inicializa mapas de refeição
         refeicoes.put("cafe", new ArrayList<>());
         refeicoes.put("almoco", new ArrayList<>());
+        refeicoes.put("cafeTarde", new ArrayList<>());
         refeicoes.put("jantar", new ArrayList<>());
 
         btnAddCafe.setOnClickListener(v -> abrirDialogIngrediente("cafe", layoutCafe));
         btnAddAlmoco.setOnClickListener(v -> abrirDialogIngrediente("almoco", layoutAlmoco));
+        btnAddCafeTarde.setOnClickListener(v -> abrirDialogIngrediente("cafeTarde", layoutCafeTarde));
         btnAddJantar.setOnClickListener(v -> abrirDialogIngrediente("jantar", layoutJantar));
 
         btnAdicionarDietas.setOnClickListener(v -> salvarDietasSelecionadas());
@@ -277,10 +281,11 @@ public class CriarDietaActivity extends AppCompatActivity {
         for (int dia : diasSelecionados) {
             String cafe = String.join("\n", refeicoes.get("cafe"));
             String almoco = String.join("\n", refeicoes.get("almoco"));
+            String cafeTarde = String.join("\n", refeicoes.get("cafeTarde"));
             String jantar = String.join("\n", refeicoes.get("jantar"));
 
             // salva Dieta (mantém a tabela dietas)
-            Dieta d = new Dieta(dia, cafe, almoco, jantar);
+            Dieta d = new Dieta(dia, cafe, almoco, cafeTarde, jantar);
             dietaDAO.salvarDieta(d);
 
             // sincroniza com refeicoes (inserir ou atualizar por nome)
@@ -288,6 +293,7 @@ public class CriarDietaActivity extends AppCompatActivity {
 
             upsertRefeicao(rDao, dia, "Café da Manhã", "08:00", cafe);
             upsertRefeicao(rDao, dia, "Almoço", "12:00", almoco);
+            upsertRefeicao(rDao, dia, "Café da Tarde", "08:00", cafeTarde);
             upsertRefeicao(rDao, dia, "Jantar", "19:00", jantar);
         }
 

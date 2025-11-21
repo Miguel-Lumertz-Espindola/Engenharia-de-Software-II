@@ -14,9 +14,26 @@ public interface DietaDAO {
     @Query("SELECT * FROM dietas WHERE dia = :dia LIMIT 1")
     Dieta getDietaPorDia(int dia);
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE) // NÃO SOBRESCREVE MAIS
+    void inserirDieta(Dieta dieta);
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void salvarDieta(Dieta dieta);
+
+    @Update
+    void atualizarDieta(Dieta dieta);
 
     @Delete
     void excluirDieta(Dieta dieta);
 }
+
+//@Dao
+//public interface DietaDAO {
+//    @Query("SELECT * FROM dietas WHERE dia = :dia LIMIT 1")
+//    Dieta getDietaPorDia(int dia);
+//
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    void salvarDieta(Dieta dieta);
+//
+//    @Delete
+//    void excluirDieta(Dieta dieta);
+//}

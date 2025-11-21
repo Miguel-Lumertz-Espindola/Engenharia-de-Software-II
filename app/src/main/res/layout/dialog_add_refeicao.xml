@@ -9,7 +9,7 @@
         android:id="@+id/inputTipoRefeicao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Tipo (ex: Café da manhã, Almoço, Jantar)"/>
+        android:hint="Tipo (ex: Café da manhã, Almoço, Café da manhã, Jantar)"/>
 
     <EditText
         android:id="@+id/inputNomeRefeicao"

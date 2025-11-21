@@ -3,8 +3,10 @@ package com.example.projetoengenhariadesoftwareii;
 import android.app.Dialog;
 import android.content.Context;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,11 +23,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-import java.util.TimeZone;
 
 public class AlterarHorarioDialog {
-
-    private DiaAdapter diaAdapter;  // DECLARAÇÃO AQUI
+    private static DiaAdapter diaAdapter;
 
     public interface Callback {
         void aoSalvar();
@@ -37,59 +37,62 @@ public class AlterarHorarioDialog {
         dialog.setCancelable(true);
 
         TimePicker timePicker = dialog.findViewById(R.id.timePickerHorario);
-        RecyclerView recyclerDias = dialog.findViewById(R.id.recyclerDiasHorario);
-        TextView textoMesSemana = dialog.findViewById(R.id.textoMesSemana);
+        RecyclerView recyclerDias = dialog.findViewById(R.id.recyclerDias);
+        TextView txtMesSemana = dialog.findViewById(R.id.textoMesSemana);
+
         Button btnSalvar = dialog.findViewById(R.id.btnSalvarHorarioDialog);
         Button btnCancelar = dialog.findViewById(R.id.btnCancelarHorarioDialog);
+        ImageButton btnAnt = dialog.findViewById(R.id.btnSemanaAnterior);
+        ImageButton btnProx = dialog.findViewById(R.id.btnProximaSemana);
 
         timePicker.setIs24HourView(true);
-
         btnCancelar.setOnClickListener(v -> dialog.dismiss());
 
-        // --------------------- MINI AGENDA NOVA ------------------------
-        Calendar calendario = Calendar.getInstance(TimeZone.getTimeZone("America/Sao_Paulo"));
-        int mesAtual = calendario.get(Calendar.MONTH);
-        int anoAtual = calendario.get(Calendar.YEAR);
-        int diaHoje = calendario.get(Calendar.DAY_OF_MONTH);
-        int semanaAtual = 1;
+        // ---------- CALENDÁRIO ----------
+        Calendar cal = Calendar.getInstance();
+        final int mesAtual = cal.get(Calendar.MONTH);
+        final int anoAtual = cal.get(Calendar.YEAR);
+        final int diaHoje = cal.get(Calendar.DAY_OF_MONTH);
 
-        // gera todos os dias do mês
         List<DiaItem> diasDoMes = gerarDiasDoMes(mesAtual, anoAtual, diaHoje);
+        final Set<Integer> selecionados = new HashSet<>();
 
-        // Set para manter os dias selecionados
-        Set<Integer> diasSelecionados = new HashSet<>();
+        // semana começa na 1
+        final int[] semanaAtual = new int[]{1};
 
-        // primeira semana
-        List<DiaItem> primeiraSemana = getSubListaSemana(diasDoMes, 1);
-        DiaAdapter diaAdapter = new DiaAdapter(primeiraSemana, diasSelecionados, dia -> {
-            if (diasSelecionados.contains(dia)) diasSelecionados.remove(dia);
-            else diasSelecionados.add(dia);
+        // monta primeira semana
+        List<DiaItem> semanaLista = getSemana(diasDoMes, semanaAtual[0]);
+
+        // ADAPTER
+        diaAdapter = new DiaAdapter(semanaLista, selecionados, dia -> {
+            if (selecionados.contains(dia)) selecionados.remove(dia);
+            else selecionados.add(dia);
             diaAdapter.notifyDataSetChanged();
         });
 
         recyclerDias.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
-
         recyclerDias.setAdapter(diaAdapter);
+        atualizarTextoMesSemana(txtMesSemana, mesAtual, semanaAtual[0]);
 
-        atualizarTextoMesSemana(textoMesSemana, mesAtual, semanaAtual);
+        // BOTÕES DE SEMANA — só funcionam se existirem no XML!
+        if (btnAnt != null) {
+            btnAnt.setOnClickListener(v -> {
+                if (semanaAtual[0] > 1) {
+                    semanaAtual[0]--;
+                    atualizarSemana(semanaAtual[0], diasDoMes, diaAdapter, txtMesSemana, mesAtual);
+                }
+            });
+        }
 
-        // Botão semana anterior
-        dialog.findViewById(R.id.btnSemanaAnterior).setOnClickListener(v -> {
-            if (semanaAtual > 1) {
-                semanaAtual--;
-                irParaSemana(semanaAtual, diasDoMes, diaAdapter, recyclerDias, textoMesSemana, mesAtual);
-            }
-        });
-
-        // Botão próxima semana
-        dialog.findViewById(R.id.btnProximaSemana).setOnClickListener(v -> {
-            int totalSemanas = (int) Math.ceil(diasDoMes.size() / 7.0);
-            if (semanaAtual < totalSemanas) {
-                semanaAtual++;
-                irParaSemana(semanaAtual, diasDoMes, diaAdapter, recyclerDias, textoMesSemana, mesAtual);
-            }
-        });
-        // -------------------------------------------------------------------
+        if (btnProx != null) {
+            btnProx.setOnClickListener(v -> {
+                int totalSemanas = (int) Math.ceil(diasDoMes.size() / 7.0);
+                if (semanaAtual[0] < totalSemanas) {
+                    semanaAtual[0]++;
+                    atualizarSemana(semanaAtual[0], diasDoMes, diaAdapter, txtMesSemana, mesAtual);
+                }
+            });
+        }
 
         // SALVAR
         btnSalvar.setOnClickListener(v -> {
@@ -102,19 +105,17 @@ public class AlterarHorarioDialog {
 
             refeicao.setHorario(novoHorario);
             rDao.atualizarRefeicao(refeicao);
+            atualizarDieta(dDao, diaOriginal, rDao.getRefeicoesPorDia(diaOriginal));
 
-            List<Refeicao> listaOriginal = rDao.getRefeicoesPorDia(diaOriginal);
-            atualizarDietaDadoRefeicoes(dDao, diaOriginal, listaOriginal);
+            for (Integer dia : new HashSet<>(selecionados)) {
+                if (dia == diaOriginal) continue;
 
-            for (Integer diaAlvo : new HashSet<>(diasSelecionados)) {
-                if (diaAlvo == diaOriginal) continue;
-
-                List<Refeicao> refeicoesAlvo = rDao.getRefeicoesPorDia(diaAlvo);
+                List<Refeicao> lista = rDao.getRefeicoesPorDia(dia);
                 boolean achou = false;
-
-                if (refeicoesAlvo != null) {
-                    for (Refeicao r : refeicoesAlvo) {
-                        if (r.getNome() != null && r.getNome().equalsIgnoreCase(refeicao.getNome())) {
+                if (lista != null) {
+                    for (Refeicao r : lista) {
+                        if (r.getNome().equalsIgnoreCase(refeicao.getNome()))
+                        {
                             r.setHorario(novoHorario);
                             rDao.atualizarRefeicao(r);
                             achou = true;
@@ -122,14 +123,11 @@ public class AlterarHorarioDialog {
                         }
                     }
                 }
-
                 if (!achou) {
-                    Refeicao nova = new Refeicao(diaAlvo, refeicao.getNome(), novoHorario, refeicao.getDescricao());
+                    Refeicao nova = new Refeicao(dia, refeicao.getNome(), novoHorario, refeicao.getDescricao());
                     rDao.inserirRefeicao(nova);
                 }
-
-                List<Refeicao> atualizadas = rDao.getRefeicoesPorDia(diaAlvo);
-                atualizarDietaDadoRefeicoes(dDao, diaAlvo, atualizadas);
+                atualizarDieta(dDao, dia, rDao.getRefeicoesPorDia(dia));
             }
 
             dialog.dismiss();
@@ -139,97 +137,126 @@ public class AlterarHorarioDialog {
         dialog.show();
     }
 
-    // --------------- FUNÇÕES AUXILIARES -------------------
-
+    // ---------- MINI-AGENDA ----------
     private static List<DiaItem> gerarDiasDoMes(int mes, int ano, int diaHoje) {
-        List<DiaItem> dias = new ArrayList<>();
+        List<DiaItem> lista = new ArrayList<>();
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, ano);
         cal.set(Calendar.MONTH, mes);
+        int max = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 
-        int totalDias = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-        for (int i = 1; i <= totalDias; i++) {
-            cal.set(Calendar.DAY_OF_MONTH, i);
-            int diaSemana = cal.get(Calendar.DAY_OF_WEEK);
-            boolean isHoje = (i == diaHoje);
-            dias.add(new DiaItem(i, getNomeDiaCurto(diaSemana), isHoje));
+        for (int d = 1; d <= max; d++) {
+            cal.set(Calendar.DAY_OF_MONTH, d);
+            lista.add(new DiaItem(d, getNomeDiaCurto(cal.get(Calendar.DAY_OF_WEEK)), d == diaHoje));
         }
-        return dias;
+        return lista;
     }
 
-    private static List<DiaItem> getSubListaSemana(List<DiaItem> todos, int semana) {
-        int inicio = (semana - 1) * 7;
-        int fim = Math.min(inicio + 7, todos.size());
-        return new ArrayList<>(todos.subList(inicio, fim));
+//    private static List<DiaItem> getSemana(List<DiaItem> dias, int semana) {
+//        int inicio = (semana - 1) * 7;
+//        int fim = Math.min(inicio + 7, dias.size());
+//        return dias.subList(inicio, fim);
+//    }
+private static List<DiaItem> getSemana(List<DiaItem> dias, int semana) {
+    int inicio = (semana - 1) * 7;
+    int fim = Math.min(inicio + 7, dias.size());
+
+    // return dias.subList(inicio, fim);  // ❌ ERRO
+    // ✔️ solução segura:
+    return new ArrayList<>(dias.subList(inicio, fim));
+}
+
+
+    private static void atualizarSemana(int semana, List<DiaItem> dias, DiaAdapter adp,
+                                        TextView txt, int mes) {
+        adp.atualizarLista(getSemana(dias, semana));
+        atualizarTextoMesSemana(txt, mes, semana);
     }
 
-    private static void irParaSemana(int semanaAtual, List<DiaItem> diasDoMes,
-                                     DiaAdapter diaAdapter, RecyclerView recyclerDias,
-                                     TextView textoMesSemana, int mesAtual) {
-
-        List<DiaItem> novaLista = getSubListaSemana(diasDoMes, semanaAtual);
-        diaAdapter.atualizarLista(novaLista);
-        atualizarTextoMesSemana(textoMesSemana, mesAtual, semanaAtual);
+    private static void atualizarTextoMesSemana(TextView txt, int mes, int semana) {
+        txt.setText(getNomeMes(mes) + " - Semana " + semana);
     }
 
-    private static void atualizarTextoMesSemana(TextView texto, int mes, int semana) {
-        texto.setText(getNomeMes(mes) + " - Semana " + semana);
+    private static String getNomeMes(int m) {
+        String[] meses = {"Janeiro","Fevereiro","Março","Abril","Maio","Junho",
+                "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"};
+        return meses[m];
     }
 
-    private static String getNomeMes(int mes) {
-        String[] nomes = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-                "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"};
-        return nomes[mes];
-    }
+    // ---------- DIETA ----------
+//    private static void atualizarDieta(DietaDAO dao, int dia, List<Refeicao> lista) {
+//        String cafeManha="", almoco="", cafeTarde="", jantar="";
+//        if (lista != null) {
+//            for (Refeicao r : lista) {
+//                String tipo = r.getNome().toLowerCase();
+//                String item = r.getNome() + " (" + r.getHorario() + ")";
+//                if (tipo.contains("cafeManha")) cafeManha = append(cafeManha, item);
+//                else if (tipo.contains("almoço")) almoco = append(almoco, item);
+//                else if (tipo.contains("cafeTarde")) cafeTarde = append(cafeTarde, item);
+//                else jantar = append(jantar, item);
+//            }
+//        }
+//        dao.salvarDieta(new Dieta(dia, cafeManha, almoco, cafeTarde, jantar));
+//    }
 
-    private static String getNomeDiaCurto(int diaSemana) {
-        switch (diaSemana) {
-            case Calendar.SUNDAY: return "Dom";
-            case Calendar.MONDAY: return "Seg";
-            case Calendar.TUESDAY: return "Ter";
-            case Calendar.WEDNESDAY: return "Qua";
-            case Calendar.THURSDAY: return "Qui";
-            case Calendar.FRIDAY: return "Sex";
-            case Calendar.SATURDAY: return "Sáb";
-            default: return "";
-        }
-    }
-
-    private static void atualizarDietaDadoRefeicoes(DietaDAO dao, int dia, List<Refeicao> lista) {
-        String cafe = "", almoco = "", jantar = "";
+    private static void atualizarDieta(DietaDAO dao, int dia, List<Refeicao> lista) {
+        // mantém as descrições ORIGINAIS
+        String cafe="", almoco="", cafeTarde="", jantar="";
 
         if (lista != null) {
             for (Refeicao r : lista) {
-                String tipo = (r.getNome() == null) ? "" : r.getNome().toLowerCase();
-                String entry = r.getNome() + " (" + r.getHorario() + ")";
-                if (tipo.contains("café") || tipo.contains("cafe") || tipo.contains("manhã") || tipo.contains("manha")) {
-                    cafe = append(cafe, entry);
-                } else if (tipo.contains("almoço") || tipo.contains("almoco")) {
-                    almoco = append(almoco, entry);
-                } else if (tipo.contains("jantar")) {
-                    jantar = append(jantar, entry);
-                } else {
-                    if (jantar.isEmpty()) jantar = append(jantar, entry);
-                    else if (almoco.isEmpty()) almoco = append(almoco, entry);
-                    else if (cafe.isEmpty()) cafe = append(cafe, entry);
-                    else jantar = append(jantar, entry);
+                String nome = r.getNome().toLowerCase();
+                String descricao = r.getDescricao();  // <-- MUITO IMPORTANTE!
+
+                // se não tiver descrição, melhor não sobrescrever!
+                if (descricao == null || descricao.trim().isEmpty()) continue;
+
+                if (nome.contains("café da manhã") || nome.contains("cafe da manha")) {
+                    cafe = append(cafe, descricao);
+                }
+                else if (nome.contains("almoço") || nome.contains("almoco")) {
+                    almoco = append(almoco, descricao);
+                }
+                else if (nome.contains("café da tarde") || nome.contains("cafe da tarde")) {
+                    cafeTarde = append(cafeTarde, descricao);
+                }
+                else if (nome.contains("jantar")) {
+                    jantar = append(jantar, descricao);
                 }
             }
         }
-        Dieta d = new Dieta(dia, cafe, almoco, jantar);
-        dao.salvarDieta(d);
+
+        // Atualiza a dieta sem sobrescrever tudo
+        Dieta existente = dao.getDietaPorDia(dia);
+        if (existente == null) {
+            dao.inserirDieta(new Dieta(dia, cafe, almoco, cafeTarde, jantar));
+        } else {
+            if (!cafe.isEmpty())     existente.setCafeManha(cafe);
+            if (!almoco.isEmpty())   existente.setAlmoco(almoco);
+            if (!cafeTarde.isEmpty())existente.setCafeTarde(cafeTarde);
+            if (!jantar.isEmpty())   existente.setJantar(jantar);
+            dao.atualizarDieta(existente);
+        }
     }
 
-    private static String append(String base, String entry) {
-        return base == null || base.isEmpty() ? entry : base + "; " + entry;
+
+    private static String append(String base, String v) {
+        return base.isEmpty() ? v : base + "; " + v;
+    }
+
+    private static String getNomeDiaCurto(int d) {
+        return new String[]{"Dom","Seg","Ter","Qua","Qui","Sex","Sáb"}[d-1];
     }
 }
+
 
 //package com.example.projetoengenhariadesoftwareii;
 //
 //import android.app.Dialog;
 //import android.content.Context;
+//import android.os.Bundle;
 //import android.widget.Button;
+//import android.widget.TextView;
 //import android.widget.TimePicker;
 //
 //import androidx.recyclerview.widget.GridLayoutManager;

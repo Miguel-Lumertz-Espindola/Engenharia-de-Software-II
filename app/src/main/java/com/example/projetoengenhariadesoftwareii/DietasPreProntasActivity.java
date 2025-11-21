@@ -95,27 +95,75 @@ public class DietasPreProntasActivity extends AppCompatActivity {
         // 🔹 Insere dietas pré-prontas só se o banco estiver vazio
         if (db.dietaPreProntaDAO().getTodas().isEmpty()) {
             db.dietaPreProntaDAO().inserir(new DietaPreProntaModel(
-                    "Dieta Fit Equilibrada",
-                    "Alimentação balanceada para quem busca emagrecimento saudável",
-                    "Iogurte natural (200g) + granola (100g) + banana (2un)",
-                    "Peito de frango grelhado + arroz integral + salada",
-                    "Omelete de claras + salada verde"
+                    "Emagrecimento Prático",
+                    "Feita para quem quer perder peso de forma leve, sem muitas restrições e com alimentos simples, baratos e fáceis de preparar.",
+                    "Pão Francês (50g) + ovo mexido (100g) + mamão (170g)",
+                    "Arroz (165g) + Feijão (140g) + Peito de frango grelhado (100g) + Cenoura cozida (160g) + Salada de alface e pepino à vontade + 1 fio de azeite",
+                    "Iogurte natural desnatado (165g) + Granola (39g) + banana pequena (50g)",
+                    "Filé de frango grelhado (150g) + Legumes cozidos (165g) + Suco natural de limão sem açúcar (240ml)"
             ));
 
             db.dietaPreProntaDAO().inserir(new DietaPreProntaModel(
-                    "Dieta Proteica",
-                    "Ideal para ganho de massa muscular",
-                    "Ovos mexidos + pão integral + suco natural",
-                    "Carne magra + batata-doce + brócolis",
-                    "Peixe grelhado + legumes no vapor"
+                    "Ganho de Massa com Moderado Rigor",
+                    "Focada em fornecer proteínas e calorias suficientes para aumentar a massa muscular, com alimentos balanceados e quantidades um pouco maiores.",
+                    "Pão de forma integral (100g) + Pasta de amendoim (16g) + Iogurte grego (100g) + banana pequena (55g)",
+                    "Arroz integral (165g) + Lentilha (85g) + Peito de frango grelhado (120g) + Beterraba cozida (125g) + Salada de rúcula e pepino à vontade + azeite (8ml)",
+                    "Crepioca (100g) com frango desfiado (60g) + mamão papaia (170g)",
+                    "Carne moída refogada (75g)+ Macarrão cozido (140g) + Legumes à moda mediterrânea (150g) + Suco de abacaxi (165ml)"
             ));
 
             db.dietaPreProntaDAO().inserir(new DietaPreProntaModel(
-                    "Dieta Vegetariana",
-                    "Foco em proteínas vegetais e equilíbrio nutricional",
-                    "Vitamina de frutas com aveia",
-                    "Lentilha + arroz integral + legumes refogados",
-                    "Tofu grelhado + salada com grão-de-bico"
+                    "Manutenção de Peso Saudável",
+                    "Equilíbrio entre energia e nutrientes. Ideal para quem busca manter o peso e a saúde com refeições variadas e flexíveis.",
+                    "Pão caseiro com requeijão (100g) + ovo mexido (100g) + fatia de melância (200g)",
+                    "Polenta (240g) + Feijão (140g) + Filé de peixe grelhado (120g) + Moranga (180g) + Salada de acelga com azeite",
+                    "Iogurte grego (100g) + Castanha-do-pará (16g) + pêra (110g)",
+                    "Frango desfiado (120g) + Aipim cozido (150g) + Suco natural de abacaxi (165ml)"
+            ));
+
+            db.dietaPreProntaDAO().inserir(new DietaPreProntaModel(
+                    "Melhorar Saúde em Geral, Alto Rigor e Orçamento",
+                    "Dieta inspirada no estilo mediterrâneo, com foco em qualidade nutricional, antioxidantes e gorduras boas. Inclui alimentos mais caros (salmão, oleaginosas, frutas variadas).",
+                    "Panqueca de banana com aveia (121g) + Iogurte natural (100g) + Mix de sementes (chia, girassol, abóbora) (45g)",
+                    "Arroz integral (165g) + Grão-de-bico cozido (83g) + Filé de peixe grelhado (120g) + Legumes variados (cenoura, chuchu, couve-flor) (180g) + Azeite extravirgem (8ml)",
+                    "Iogurte grego (100g) + Abacate (135g) com farelo de aveia (20g)",
+                    "Filé de frango grelhado (150g) + Salada de legumes cozidos (165g) + Suco de limão tahiti sem açucar (240ml)"
+            ));
+
+            db.dietaPreProntaDAO().inserir(new DietaPreProntaModel(
+                    "Emagrecimento Controlado",
+                    "Dieta mais trabalhosa (baixa praticidade), com preparações caseiras, alimentos frescos e controle alto de calorias. Foco forte em proteínas magras, fibras e quase nada de ultraprocessados.",
+                    "Panqueca de banana com aveia (121g) + Ovos mexidos (100g) + Mamão (170g) + Chia (15g)",
+                    "Arroz integral (165g) + Lentilha cozida (85g) + Peito de frango grelhado (120g) + Cenoura cozida (160g) + Salada de rúcula à vontade + azeite (8ml)",
+                    "Iogurte natural desnatado (165g) + Mix de castanhas (15g) + Morango (120g)",
+                    "Filé de frango grelhado (150g) + Moranga cozida (300g) + Salada de acelga limão à vontade"
+            ));
+
+            db.dietaPreProntaDAO().inserir(new DietaPreProntaModel(
+                    "Massa Magra com Baixo Custo",
+                    "Como a pessoa treina pouco, o ganho de massa vem da regularidade proteica, refeições simples, rápidas, baratas e com bastante carboidrato.",
+                    "Pão francês (50g) + Pasta de amendoim (16g) + Banana (55g) + Iogurte natural (100g)",
+                    "Arroz (165g) + Feijão (140g) + Peito de frango grelhado (120g) + Cenoura cozida (160g)",
+                    "Bolo de aveia (50g) + Iogurte natural desnatado (165g)",
+                    "Tapioca (200g) com frango desfiado (120g) + Suco natural de laranja (180ml)"
+            ));
+
+            db.dietaPreProntaDAO().inserir(new DietaPreProntaModel(
+                    "Emagrecimento Saudável Vegetariano",
+                    "Dieta vegetariana, rica em fibras e com menor densidade calórica. Foco total em emagrecimento saudável e controle calórico.",
+                    "Panqueca de banana com aveia (121g) + Iogurte grego (100g) + Mamão (170g) + Semente de chia (15g)",
+                    "Arroz integral (165g) + Lentilha (85g) + Ovo cozido (2un) + Couve-flor cozida (180g) + Salada de rúcula à vontade + fio de azeite",
+                    "Iogurte natural desnatado (165g) + Castanha-do-pará (12g) + Morango (120g)",
+                    "Legumes à moda mediterrânea (150g) + Batata inglesa cozida (300g) + Suco de limão (240ml)"
+            ));
+
+            db.dietaPreProntaDAO().inserir(new DietaPreProntaModel(
+                    "Ganho de Massa Vegetariano",
+                    "Com foco em proteínas vegetais, ovos, laticínios e carboidratos mais densos. Ideal para vegetarianos que querem aumentar a ingestão calórica e proteica.",
+                    "Pão integral (100g) + Queijo minas (40g) + Ovo mexido (100g) + Banana (55g)",
+                    "Macarrão cozido (160g) + Grão-de-bico cozido (83g) + Ovo cozido (2un) + Beterraba cozida (125g) + Salada de acelga à vontade + fio de azeite",
+                    "Crepioca (100g) + Pasta de amendoim (16g) + Kiwi (150g)",
+                    "Legumes cozidos (165g) + Aipim cozido (150g) + Iogurte natural (100g)"
             ));
         }
 
@@ -148,23 +196,37 @@ public class DietasPreProntasActivity extends AppCompatActivity {
         // 🔸 Formatar refeições
         String cafe = formatarRefeicao(dieta.getCafeManha());
         String almoco = formatarRefeicao(dieta.getAlmoco());
+        String cafeTarde = formatarRefeicao(dieta.getCafeTarde());
         String jantar = formatarRefeicao(dieta.getJantar());
 
         // 🔹 Salvar para cada dia selecionado
         for (int dia : diasSelecionados) {
 
             // Salvar dieta na tabela DIETAS
-            Dieta nova = new Dieta(dia, cafe, almoco, jantar);
+            Dieta nova = new Dieta(dia, cafe, almoco, cafeTarde, jantar);
             dietaDAO.salvarDieta(nova);
 
-            // 🔹 SALVAR TAMBÉM NA TABELA DE REFEICOES (EVITA DUPLICAÇÃO)
-            refeicaoDao.excluirPorDia(dia); // limpa antes
-            // Café da manhã
-            refeicaoDao.inserirRefeicao(new Refeicao(dia, "Café da Manhã", "08:00", cafe));
-            // Almoço
-            refeicaoDao.inserirRefeicao(new Refeicao(dia, "Almoço", "12:00", almoco));
-            // Jantar
-            refeicaoDao.inserirRefeicao(new Refeicao(dia, "Jantar", "19:00", jantar));
+            // 🔄 SE EXISTIR REFEICOES NO DIA → NÃO APAGA! SOMENTE PREENCHE OS CAMPOS VAZIOS
+            List<Refeicao> existentes = refeicaoDao.getRefeicoesPorDia(dia);
+
+            if (existentes != null && !existentes.isEmpty()) {
+                // Só atualiza os campos vazios
+                for (Refeicao r : existentes) {
+                    if (r.getDescricao() == null || r.getDescricao().trim().isEmpty()) {
+                        if (r.getNome().contains("Café da Manhâ")) r.setDescricao(cafe);
+                        else if (r.getNome().contains("Almoço")) r.setDescricao(almoco);
+                        else if (r.getNome().contains("Café da Tarde")) r.setDescricao(cafeTarde);
+                        else if (r.getNome().contains("Jantar")) r.setDescricao(jantar);
+                        refeicaoDao.atualizarRefeicao(r);
+                    }
+                }
+            } else {
+                // NÃO EXISTE NADA → cria padrão
+                refeicaoDao.inserirRefeicao(new Refeicao(dia, "Café da Manhã", "08:00", cafe));
+                refeicaoDao.inserirRefeicao(new Refeicao(dia, "Almoço", "12:00", almoco));
+                refeicaoDao.inserirRefeicao(new Refeicao(dia, "Café da Tarde", "15:00", cafe));
+                refeicaoDao.inserirRefeicao(new Refeicao(dia, "Jantar", "19:00", jantar));
+            }
         }
 
         Toast.makeText(this,
@@ -245,6 +307,7 @@ public class DietasPreProntasActivity extends AppCompatActivity {
 
         adicionarRefeicao(layoutRefeicoes, "Café da Manhã", dieta.getCafeManha());
         adicionarRefeicao(layoutRefeicoes, "Almoço", dieta.getAlmoco());
+        adicionarRefeicao(layoutRefeicoes, "Café da Tarde", dieta.getCafeTarde());
         adicionarRefeicao(layoutRefeicoes, "Jantar", dieta.getJantar());
 
         AlertDialog dialog = new AlertDialog.Builder(context)

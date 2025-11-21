@@ -17,7 +17,7 @@ import com.example.projetoengenhariadesoftwareii.database.model.Ingrediente;
 import com.example.projetoengenhariadesoftwareii.database.model.Refeicao;
 import com.example.projetoengenhariadesoftwareii.database.model.UsuarioModel;
 
-@Database(entities = {Dieta.class, UsuarioModel.class, DietaPreProntaModel.class, Ingrediente.class, Refeicao.class}, version = 12, exportSchema = false)
+@Database(entities = {Dieta.class, UsuarioModel.class, DietaPreProntaModel.class, Ingrediente.class, Refeicao.class}, version = 14, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase instancia;

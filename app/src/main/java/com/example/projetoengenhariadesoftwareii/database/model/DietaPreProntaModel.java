@@ -13,13 +13,15 @@ public class DietaPreProntaModel {
     private String descricao;
     private String cafeManha;
     private String almoco;
+    private String cafeTarde;
     private String jantar;
 
-    public DietaPreProntaModel(String nomeDieta, String descricao, String cafeManha, String almoco, String jantar) {
+    public DietaPreProntaModel(String nomeDieta, String descricao, String cafeManha, String almoco, String cafeTarde, String jantar) {
         this.nomeDieta = nomeDieta;
         this.descricao = descricao;
         this.cafeManha = cafeManha;
         this.almoco = almoco;
+        this.cafeTarde = cafeTarde;
         this.jantar = jantar;
     }
 
@@ -38,6 +40,9 @@ public class DietaPreProntaModel {
 
     public String getAlmoco() { return almoco; }
     public void setAlmoco(String almoco) { this.almoco = almoco; }
+
+    public String getCafeTarde() { return cafeTarde; }
+    public void setCafeTarde(String cafeTarde) { this.cafeTarde = cafeTarde; }
 
     public String getJantar() { return jantar; }
     public void setJantar(String jantar) { this.jantar = jantar; }
