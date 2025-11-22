@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tituloDieta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nome da dieta"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="@color/azulEscuro"
+            android:gravity="center"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:id="@+id/textDescricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descrição da dieta"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="-------------------------------------------------"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:id="@+id/layoutRefeicoes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="?android:attr/dividerHorizontal"
+            android:orientation="vertical"
+            android:showDividers="middle" />
+
+    </LinearLayout>
+
+</ScrollView>

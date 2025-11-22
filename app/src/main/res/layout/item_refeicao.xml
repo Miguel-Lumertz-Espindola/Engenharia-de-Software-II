@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/textNomeRefeicao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome da refeição"
+            android:textSize="16sp"
+            android:textColor="@color/azulEscuro"/>
+
+        <TextView
+            android:id="@+id/textHorarioRefeicao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="08:00"
+            android:textSize="14sp"
+            android:layout_marginTop="2dp"/>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btnAlterarNome"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="Alterar nome"
+        android:src="@drawable/ic_nome"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="6dp"/>
+
+    <ImageButton
+        android:id="@+id/btnAlterarHorario"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="Alterar horário"
+        android:src="@drawable/ic_time"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="6dp"/>
+
+    <ImageButton
+        android:id="@+id/btnExcluirRefeicao"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_delete"
+        android:contentDescription="Excluir"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="6dp"
+        android:layout_marginStart="4dp"/>
+</LinearLayout>
