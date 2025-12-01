@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/borda_escura_gradiente"
+        android:orientation="horizontal"
+        android:padding="14dp"
+        android:gravity="center_vertical">
+
+        <!-- COLUNA DE TEXTOS -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvNomeRefeicao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome da Refeição"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginStart="12dp" />
+
+            <EditText
+                android:id="@+id/editNomeRefeicao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nome"
+                android:visibility="gone"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:layout_marginStart="12dp" />
+
+            <!-- Linha de horário -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/tvHorarioRefeicao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="08:00"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/editHorarioRefeicao"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:hint="HH:mm"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:layout_marginStart="12dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- COLUNA DE BOTÕES EM HORIZONTAL -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginStart="12dp">
+
+            <ImageButton
+                android:id="@+id/btnAlterarNome"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/btnalterarnomebranco"
+                android:background="@null"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:layout_marginEnd="10dp" />
+
+            <ImageButton
+                android:id="@+id/btnSalvarNome"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/ic_salvar"
+                android:background="@null"
+                android:visibility="gone"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:layout_marginEnd="10dp" />
+
+            <ImageButton
+                android:id="@+id/btnAlterarHorario"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/btnalterarhorariobranco"
+                android:background="@null"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:layout_marginEnd="10dp" />
+
+            <ImageButton
+                android:id="@+id/btnSalvarHorario"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_salvar"
+                android:background="@null"
+                android:visibility="gone"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:layout_marginEnd="10dp" />
+
+            <ImageButton
+                android:id="@+id/btnExcluirRefeicao"
+                android:layout_width="50dp"
+                android:layout_height="42dp"
+                android:src="@drawable/ic_delete"
+                android:background="@null"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

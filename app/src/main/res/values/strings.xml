@@ -1,0 +1,51 @@
+<resources>
+    <string name="objetivo_prompt">Selecione o objetivo</string>
+    <string name="atividade_prompt">Selecione o nível de atividade</string>
+    <string name="praticidade_prompt">Selecione o nível de praticidade</string>
+    <string name="rigor_prompt">Selecione o nível de rigor</string>
+    <string name="orcamento_prompt">Selecione o nível de rigor</string>
+
+    <string-array name="opcoes_objetivo">
+        <item>Emagrecimento</item>
+        <item>Ganho de massa</item>
+        <item>Manutenção de peso</item>
+        <item>Melhorar saúde geral</item>
+    </string-array>
+
+    <string-array name="opcoes_atividade">
+        <item>Sedentário</item>
+        <item>Leve</item>
+        <item>Moderado</item>
+        <item>Intenso</item>
+    </string-array>
+
+    <string-array name="opcoes_praticidade">
+        <item>Baixa</item>
+        <item>Média</item>
+        <item>Alta</item>
+    </string-array>
+
+    <string-array name="opcoes_rigor">
+        <item>Leve</item>
+        <item>Moderado</item>
+        <item>Rigoroso</item>
+    </string-array>
+
+    <string name="voltar_texto">&lt; Voltar</string>
+
+    <string-array name="opcoes_orcamento">
+        <item>R$ 500</item>
+        <item>R$ 750</item>
+        <item>R$ 1000</item>
+        <item>R$ 1250</item>
+        <item>R$ 1500</item>
+        <item>R$ 1750</item>
+        <item>R$ 2000</item>
+        <item>R$ 2250</item>
+        <item>R$ 2500</item>
+        <item>R$ 2750</item>
+        <item>R$ 3000</item>
+    </string-array>
+
+
+</resources>

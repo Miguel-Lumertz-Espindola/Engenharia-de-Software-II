@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DietasPreProntasActivity"
+    android:background="@color/white">
+
+    <!-- CABEÇALHO -->
+    <LinearLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/azulEsverdeado"
+        android:padding="7dp">
+
+        <ImageButton
+            android:id="@+id/buttonlogo"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/logobranco2"
+            android:scaleType="fitCenter"
+            android:contentDescription="Logo BioBalance"
+            android:layout_marginLeft="40dp"/>
+
+        <ImageButton
+            android:id="@+id/buttonMenu"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="Menu"
+            android:src="@drawable/menu"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:background="@null"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <!-- Mini agenda (baseada na today_activity) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:background="#E9F5F3">
+
+                <ImageButton
+                    android:id="@+id/btnSemanaAnterior"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_arrow_left" />
+
+                <TextView
+                    android:id="@+id/textoMesSemana"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Outubro - Semana 1"
+                    android:textColor="@color/azulPetroleo"
+                    android:textSize="20sp"
+                    android:paddingHorizontal="12dp" />
+
+                <ImageButton
+                    android:id="@+id/btnProximaSemana"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_arrow_right" />
+            </LinearLayout>
+
+            <!-- Lista horizontal de dias -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerDias"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:padding="8dp"
+                android:background="@drawable/borda_escura_gradiente"
+                android:scrollbars="horizontal" />
+
+            <!-- RECYCLERVIEW -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerDietaspreprontas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:scrollbars="vertical" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:text="Selecione o horário"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TimePicker
+                android:id="@+id/timePickerHorario"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="340dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <!-- Mini agenda (baseada na today_activity) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:padding="10dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:background="#E9F5F3">
+
+                <ImageButton
+                    android:id="@+id/btnSemanaAnterior"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_arrow_left" />
+
+                <TextView
+                    android:id="@+id/textoMesSemana"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Outubro - Semana 1"
+                    android:textColor="@color/azulPetroleo"
+                    android:textSize="20sp"
+                    android:paddingHorizontal="12dp" />
+
+                <ImageButton
+                    android:id="@+id/btnProximaSemana"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_arrow_right" />
+            </LinearLayout>
+
+            <!-- Lista horizontal de dias -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerDias"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:padding="15dp"
+                android:background="@drawable/borda_escura_gradiente"
+                android:scrollbars="horizontal" />
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btnSalvarHorarioDialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SALVAR"
+                android:backgroundTint="@color/verdeLogo"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/white"/>
+
+            <Button
+                android:id="@+id/btnCancelarHorarioDialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CANCELAR"
+                android:backgroundTint="@color/redCancel"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

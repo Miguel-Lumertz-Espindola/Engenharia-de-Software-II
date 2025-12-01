@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dialog"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <Spinner
+            android:id="@+id/spinnerIngredientes"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textAlignment="center"
+            android:spinnerMode="dropdown" />
+
+
+        <TextView
+            android:id="@+id/textDescricaoIngrediente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@color/cardview_dark_background"
+            android:textColor="@color/white"
+            android:padding="10dp"
+            android:text="Descrição:"
+            android:textSize="14sp"
+             />
+
+        <EditText
+            android:id="@+id/inputQuantidade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:hint="Quantidade"
+            android:textColorHint="@color/cinza"
+            android:inputType="numberDecimal" />
+
+    </LinearLayout>
+</LinearLayout>

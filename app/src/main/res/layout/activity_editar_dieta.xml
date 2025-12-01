@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="0dp"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- CABEÇALHO SUPERIOR -->
+    <LinearLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/azulEsverdeado"
+        android:padding="7dp">
+
+        <ImageButton
+            android:id="@+id/buttonlogo"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/logobranco2"
+            android:scaleType="fitCenter"
+            android:contentDescription="Logo BioBalance"
+            android:layout_marginLeft="40dp"/>
+
+        <ImageButton
+            android:id="@+id/buttonMenu"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="Menu"
+            android:src="@drawable/menu"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:background="@null"     />
+    </LinearLayout>
+
+<!--    &lt;!&ndash; Top bar (mesma paleta do todayActivity) &ndash;&gt;-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="56dp"-->
+<!--        android:background="@color/azulEsverdeado"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:padding="8dp"-->
+<!--        android:gravity="center_vertical">-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/buttonlogo"-->
+<!--            android:layout_width="72dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--            android:src="@drawable/logobranco"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            android:contentDescription="Logo" />-->
+
+<!--        <TextView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:text="Editar Dieta"-->
+<!--            android:textSize="20sp"-->
+<!--            android:textColor="@android:color/white"/>-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/buttonMenu"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:background="@null"-->
+<!--            android:src="@drawable/menu" />-->
+<!--    </LinearLayout>-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- conteúdo -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/textoDiaSelecionado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dia selecionado: 10"
+                android:textColor="@color/azulPetroleo"
+                android:textSize="18sp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- botões topo -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp">
+
+                <Button
+                    android:id="@+id/btnAdicionarRefeicao"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Adicionar refeição"
+                    android:backgroundTint="@color/azulPetroleo"
+                    android:textColor="@android:color/white"/>
+
+                <Button
+                    android:id="@+id/btnSalvar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Salvar"
+                    android:layout_marginStart="8dp"
+                    android:backgroundTint="@color/azulEsverdeado"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+
+            <!-- Recycler com os itens (cada item tem botões Alterar Nome/Horário/Excluir) -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerRefeicoes"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:divider="@drawable/bg_divider_refeicao"
+                android:layout_marginBottom="12dp"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- footer parecido com todayActivity -->
+    <LinearLayout
+        android:id="@+id/bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:background="@color/azulEsverdeado"
+        android:padding="7dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnDietaPronta"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Dietas Prontas"
+            android:background="@drawable/borda_escura_gradiente"
+            android:textColor="@color/white"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnInicio"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:text="Início"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/borda_escura_gradiente"
+            android:textColor="@color/white"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCriarDieta"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Criar Dieta"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/borda_escura_gradiente"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</LinearLayout>

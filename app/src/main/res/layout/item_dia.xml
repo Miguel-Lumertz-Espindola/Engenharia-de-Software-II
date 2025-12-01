@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="80dp"
+    android:layout_height="100dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/textoDiaNumero"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:text="06"
+        android:textColor="@color/black"
+        android:background="@drawable/bg_dia_normal"
+        android:textSize="20sp"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/textoDiaSemana"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dom"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="4dp" />
+</LinearLayout>
